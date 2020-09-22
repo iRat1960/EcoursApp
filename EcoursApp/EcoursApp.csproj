@@ -1,0 +1,112 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="flay.ico" />
+    <None Remove="Images\add1_active.png" />
+    <None Remove="Images\Admin.png" />
+    <None Remove="Images\avatar.jpg" />
+    <None Remove="Images\cheese.png" />
+    <None Remove="Images\cheesew.png" />
+    <None Remove="Images\network.png" />
+    <None Remove="Images\networkw.png" />
+    <None Remove="Images\networkw_alarm.png" />
+    <None Remove="Images\network_alarm.png" />
+    <None Remove="Images\next.png" />
+    <None Remove="Images\nextw.png" />
+    <None Remove="Images\prev.png" />
+    <None Remove="Images\prevw.png" />
+    <None Remove="Images\quit.png" />
+    <None Remove="Images\quitw.png" />
+    <None Remove="Images\userAdd.png" />
+    <None Remove="s1200.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Forms\" />
+    <Folder Include="Models\" />
+    <Folder Include="Themes\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="EcoursCCont">
+      <HintPath>..\..\EcoursCCont\EcoursCCont\bin\Debug\netcoreapp3.1\EcoursCCont.dll</HintPath>
+    </Reference>
+    <Reference Include="EcoursCLib">
+      <HintPath>..\..\EcoursCLib\EcoursCLib\bin\Debug\netcoreapp3.1\EcoursCLib.dll</HintPath>
+      <SpecificVersion>false</SpecificVersion>
+      <EmbedInteropTypes>false</EmbedInteropTypes>
+      <Private>true</Private>
+      <Aliases>global</Aliases>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="flay.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\add1_active.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Admin.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\avatar.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\cheese.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\cheesew.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\network.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\networkw.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\networkw_alarm.png" />
+    <Resource Include="Images\network_alarm.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\next.png" />
+    <Resource Include="Images\nextw.png" />
+    <Resource Include="Images\prev.png" />
+    <Resource Include="Images\prevw.png" />
+    <Resource Include="Images\quit.png" />
+    <Resource Include="Images\quitw.png" />
+    <Resource Include="Images\userAdd.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SplashScreen Include="s1200.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </SplashScreen>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>
