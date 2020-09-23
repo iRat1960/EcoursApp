@@ -199,8 +199,11 @@ namespace EcoursApp
                 switch (s)
                 {
                     case "Юридическая помощь":
-                        object[] oPrm = new object[] { "Справочник ОКВЭД", "EcoursCCont.CheckedTreeViewControl", "select * from OKVED", new List<string>()};
-                        ReferenceBook form = new ReferenceBook(8, oPrm);
+                        //List<string> list = new List<string> { "ОКВЭД-2", "ОКВЭД" };
+                        //object[] oPrm = new object[] { "Справочник ОКВЭД", "EcoursCCont.CheckedTreeViewControl", "select * from OKVED", new List<string>() };
+                        
+                        object[] oPrm = new object[] { "Справочник ОКТМО", "EcoursCCont.xTreeViewControl", "select * from OKTMO order by Kod" };
+                        ReferenceBook form = new ReferenceBook(2, oPrm);
                         if (form.ShowDialog() == true)
                         {
 
