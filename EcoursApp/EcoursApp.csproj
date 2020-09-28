@@ -4,6 +4,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <PackageIcon>flay.ico</PackageIcon>
+    <ApplicationIcon>flay.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,6 +27,10 @@
     <None Remove="Images\quitw.png" />
     <None Remove="Images\userAdd.png" />
     <None Remove="s1200.png" />
+    <None Include="flay.ico">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -35,50 +41,29 @@
 
   <ItemGroup>
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+    <PackageReference Include="System.Management" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="EcoursCCont">
       <HintPath>..\..\EcoursCCont\EcoursCCont\bin\Debug\netcoreapp3.1\EcoursCCont.dll</HintPath>
     </Reference>
-    <Reference Include="EcoursCLib">
-      <HintPath>..\..\EcoursCLib\EcoursCLib\bin\Debug\netcoreapp3.1\EcoursCLib.dll</HintPath>
-      <SpecificVersion>false</SpecificVersion>
-      <EmbedInteropTypes>false</EmbedInteropTypes>
-      <Private>true</Private>
-      <Aliases>global</Aliases>
+    <Reference Include="EcoursXLib">
+      <HintPath>..\..\EcoursXLib\EcoursXLib\bin\Debug\netstandard2.0\EcoursXLib.dll</HintPath>
     </Reference>
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="flay.ico">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\add1_active.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\Admin.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\avatar.jpg">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\cheese.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\cheesew.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\network.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\networkw.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="flay.ico" />
+    <Resource Include="Images\add1_active.png" />
+    <Resource Include="Images\Admin.png" />
+    <Resource Include="Images\avatar.jpg" />
+    <Resource Include="Images\cheese.png" />
+    <Resource Include="Images\cheesew.png" />
+    <Resource Include="Images\network.png" />
+    <Resource Include="Images\networkw.png" />
     <Resource Include="Images\networkw_alarm.png" />
-    <Resource Include="Images\network_alarm.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Images\network_alarm.png" />
     <Resource Include="Images\next.png" />
     <Resource Include="Images\nextw.png" />
     <Resource Include="Images\prev.png" />
@@ -89,9 +74,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <SplashScreen Include="s1200.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </SplashScreen>
+    <SplashScreen Include="s1200.png" />
   </ItemGroup>
 
   <ItemGroup>

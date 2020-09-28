@@ -289,10 +289,9 @@ namespace EcoursApp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Flags {
+        public global::EcoursXLib.HumanFlag Flags {
             get {
-                return ((string)(this["Flags"]));
+                return ((global::EcoursXLib.HumanFlag)(this["Flags"]));
             }
             set {
                 this["Flags"] = value;

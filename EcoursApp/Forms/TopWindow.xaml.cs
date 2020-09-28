@@ -1,4 +1,4 @@
-﻿using EcoursCLib;
+﻿using EcoursXLib;
 using EcoursApp.Models;
 using System;
 using System.Data;

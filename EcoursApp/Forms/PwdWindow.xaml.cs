@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using EcoursApp.Models;
 using System.Windows.Input;
-using EcoursCLib;
+using EcoursXLib;
 using System.Data.SqlClient;
 using System.Windows.Media;
 using System.Data;

@@ -3,7 +3,7 @@ using EcoursCCont;
 using EcoursCCont.Controls;
 using EcoursCCont.Forms;
 using EcoursCCont.Pages;
-using EcoursCLib;
+using EcoursXLib;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,6 +11,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -65,33 +66,32 @@ namespace EcoursApp
             G.flKeyInBottom = Properties.Settings.Default.flKeyInBottom;
             G.flStyleInTop = Properties.Settings.Default.flStyleInTop;
             G.cAppRootDir = Environment.CurrentDirectory;
-            G.cDefaultAssemblyName = "EcoursCCont.FX";
+            G.cDefaultAssemblyName = "EcoursСCont.FX";
             G.SqlConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             string[] array = G.SqlConnectionString.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
             G.cDataSource = array.FirstOrDefault(o => o.Contains("Data Source=")).Replace("Data Source=", "");
             G.cBaseSQL = array.FirstOrDefault(o => o.Contains("Initial Catalog=")).Replace("Initial Catalog=", "");
-            //G.HumanFlags = Properties.Settings.Default.Flags;
+            G.HumanFlags = Properties.Settings.Default.Flags;
+            X.DataReceived += ReceivedMessage;
             ThemeChange();
-            //List<string> list = new List<string> { "UUID", "ADID", "PCID" };
-            //string uuid = X.GetUUID();
-            //if (G.UUID.Length == 0 || G.UUID.Length > 0 && !list.Contains(G.UUID.Substring(0, 4)) || G.UUID != uuid)
-            //    G.UUID = uuid;
+            List<string> list = new List<string> { "UUID", "ADID", "PCID" };
+            string uuid = X.GetUUID();
+            if (G.UUID.Length == 0 || G.UUID.Length > 0 && !list.Contains(G.UUID.Substring(0, 4)) || G.UUID != uuid)
+                G.UUID = uuid;
             G.nHnd = X.SQLC(G.SqlConnectionString);
 
-            //X.SQLX(new Action<dynamic, Exception>(
-            //    delegate (dynamic views, Exception exception)
+            //*** Для тестирования ***
+            //X.SQLEAsync(new Action<dynamic>(
+            //    delegate (dynamic views)
             //    {
-            //        if (exception != null)
-            //        {
-            //            throw new InvalidOperationException("Проверка", exception);
-            //        }
             //        if (views != null && views is DataView)
             //        {
             //            DataView qTemp = (DataView)views;
             //            G.nAccountId = (int)qTemp[0].Row["Id"];
-            //            comboBox.ItemsSource = qTemp.Table.AsEnumerable().Select(o => o.Field<string>("Name"));
+            //            comboBox.ItemsSource = qTemp;
+            //            comboBox.SelectedIndex = 0;
             //        }
-            //    }), "exec up_getaccounts 2", "qTemp");
+            //    }), "exec up_getaccounts 1", "qTemp");
 
             timer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal, (object s, EventArgs ev) =>
             {
@@ -142,10 +142,11 @@ namespace EcoursApp
             Properties.Settings.Default.flEnabledStyle = G.flEnabledStyle;
             Properties.Settings.Default.flKeyInBottom = G.flKeyInBottom;
             Properties.Settings.Default.flStyleInTop = G.flStyleInTop;
-            //Properties.Settings.Default.Flags = G.HumanFlags;
+            Properties.Settings.Default.Flags = G.HumanFlags;
+            Properties.Settings.Default.UUID = G.UUID;
             Properties.Settings.Default.Save();
 
-            if (G.nHnd != null && (G.nHnd is SqlConnection || (G.nHnd is int && G.nHnd > 0)))
+            if (G.nHnd != null)
             {
                 X.SQLD();
             }
@@ -184,6 +185,7 @@ namespace EcoursApp
                 }
             }
         }
+
         /// <summary>
         /// Отработка события нажатия статических кнопки боковой панели
         /// </summary>
@@ -201,9 +203,10 @@ namespace EcoursApp
                     case "Юридическая помощь":
                         List<string> list = new List<string> { "ОКВЭД-2", "ОКВЭД" };
                         object[] oPrm = new object[] { "Справочник ОКВЭД", "EcoursCCont.CheckedTreeViewControl", "select * from OKVED", new List<string>() };
+                        ReferenceBook form = new ReferenceBook(10, oPrm, new object[] { list });
 
                         //object[] oPrm = new object[] { "Справочник ОКТМО", "EcoursCCont.xTreeViewControl", "select * from OKTMO order by Kod" };
-                        ReferenceBook form = new ReferenceBook(2, oPrm, new object[] { list });
+                        //ReferenceBook form = new ReferenceBook(2, oPrm);
                         if (form.ShowDialog() == true)
                         {
 
@@ -361,7 +364,15 @@ namespace EcoursApp
         #endregion
 
         #region --- Методы ---
-
+        
+        /// <summary>
+        /// Обратный вызов для сообщений из библиотеки
+        /// </summary>
+        /// <param name="e">Текст сообщения</param>
+        private void ReceivedMessage(string e)
+        {
+            MessageBox.Show(e, "Внимание!");
+        }
         /// <summary>
         /// Выполнение метода заданного в строке меню
         /// </summary>
