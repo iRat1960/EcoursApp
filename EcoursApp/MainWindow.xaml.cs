@@ -80,6 +80,9 @@ namespace EcoursApp
                 G.UUID = uuid;
             G.nHnd = X.SQLC(G.SqlConnectionString);
 
+            G.Email = "xairat1960@gmail.com";
+            G.EmailPwd = "abdoszsattvzhsba";
+
             //*** Для тестирования ***
             //X.SQLEAsync(new Action<dynamic>(
             //    delegate (dynamic views)
@@ -213,17 +216,17 @@ namespace EcoursApp
                         }
                         break;
                     case "Техподдержка":
-                        Uri iconUri = new Uri("pack://application:,,,/flay.ico", UriKind.RelativeOrAbsolute);
-                        Window win = new Window()
-                        {
-                            Title = "Учетные записи",
-                            Width = 1020,
-                            Height = 720,
-                            Icon = BitmapFrame.Create(iconUri),
-                            Style = Application.Current.Resources["WindowStyle"] as Style,
-                        };
-                        win.Content = new HomePage();
-                        win.Show();
+                        //Uri iconUri = new Uri("pack://application:,,,/flay.ico", UriKind.RelativeOrAbsolute);
+                        //Window win = new Window()
+                        //{
+                        //    Title = "Учетные записи",
+                        //    Width = 1020,
+                        //    Height = 720,
+                        //    Icon = BitmapFrame.Create(iconUri),
+                        //    Style = Application.Current.Resources["WindowStyle"] as Style,
+                        //};
+                        //win.Content = new HomePage();
+                        //win.Show();
                         break;
                     case "Авторизация":
                     case "Сменить пользователя":
@@ -422,8 +425,21 @@ namespace EcoursApp
                             var cs = asm.GetTypes().FirstOrDefault(o => o.Name == str[1]);
                             if (cs != null)
                             {
-                                Window win = (Window)Activator.CreateInstance(cs, obj);
-                                win.Show();
+                                bool fl = true;
+                                foreach (Window w in Application.Current.Windows)
+                                {
+                                    if (w.ToString() == cs.FullName)
+                                    {
+                                        fl = false;
+                                        w.Focus();
+                                        break;
+                                    }
+                                }
+                                if (fl)
+                                {
+                                    Window win = (Window)Activator.CreateInstance(cs, obj);
+                                    win.Show();
+                                }
                             }
                             break;
                         }
