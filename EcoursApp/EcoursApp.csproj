@@ -34,7 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Forms\" />
     <Folder Include="Models\" />
     <Folder Include="Themes\" />
   </ItemGroup>
@@ -42,12 +41,19 @@
   <ItemGroup>
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.11.3" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
     <PackageReference Include="System.Management" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="EcoursCCont">
       <HintPath>..\..\EcoursCCont\EcoursCCont\bin\Debug\netcoreapp3.1\EcoursCCont.dll</HintPath>
+    </Reference>
+    <Reference Include="EcoursCLib">
+      <HintPath>..\..\EcoursCLib\EcoursCLib\bin\Debug\netcoreapp3.1\EcoursCLib.dll</HintPath>
+    </Reference>
+    <Reference Include="EcoursWpfLibrary">
+      <HintPath>..\..\EcoursWpflLibrary\EcoursWpflLibrary\bin\Debug\netcoreapp3.1\EcoursWpfLibrary.dll</HintPath>
     </Reference>
     <Reference Include="EcoursXLib">
       <HintPath>..\..\EcoursXLib\EcoursXLib\bin\Debug\netstandard2.0\EcoursXLib.dll</HintPath>

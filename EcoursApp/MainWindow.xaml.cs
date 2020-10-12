@@ -1,7 +1,7 @@
 ﻿using EcoursApp.Forms;
 using EcoursCCont;
 using EcoursCCont.Controls;
-using EcoursCCont.Forms;
+using EcoursCLib.Forms;
 using EcoursCCont.Pages;
 using EcoursXLib;
 using System;
@@ -11,7 +11,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -83,6 +82,7 @@ namespace EcoursApp
             G.Email = "xairat1960@gmail.com";
             G.EmailPwd = "abdoszsattvzhsba";
 
+            
             //*** Для тестирования ***
             //X.SQLEAsync(new Action<dynamic>(
             //    delegate (dynamic views)
@@ -204,16 +204,42 @@ namespace EcoursApp
                 switch (s)
                 {
                     case "Юридическая помощь":
-                        List<string> list = new List<string> { "ОКВЭД-2", "ОКВЭД" };
-                        object[] oPrm = new object[] { "Справочник ОКВЭД", "EcoursCCont.CheckedTreeViewControl", "select * from OKVED", new List<string>() };
-                        ReferenceBook form = new ReferenceBook(10, oPrm, new object[] { list });
 
-                        //object[] oPrm = new object[] { "Справочник ОКТМО", "EcoursCCont.xTreeViewControl", "select * from OKTMO order by Kod" };
-                        //ReferenceBook form = new ReferenceBook(2, oPrm);
-                        if (form.ShowDialog() == true)
-                        {
+                        //EcoursWpfLibrary.Calendar.MyCalendar mc = new EcoursWpfLibrary.Calendar.MyCalendar(G.nHnd, "TestUser8");
+                        //mc.Show();
 
-                        }
+                        //object[] oPrm = new object[] { "Редактор", "EcoursCCont.ExtRichTextBox"};
+                        //DialogForm form = new DialogForm(oPrm);
+                        //if (form.ShowDialog() == true)
+                        //{
+
+                        //}
+
+                        //OpenFileDialog dialog = new OpenFileDialog();
+                        //dialog.Title = "Открыть";
+                        //if (dialog.ShowDialog() == true)
+                        //{
+                        //    string fileName = "1.rvf";
+                        //    string fullName = dialog.FileName;
+                        //    string path = Path.GetDirectoryName(dialog.FileName);
+                        //    //string name = Path.GetFileName(dialog.FileName);
+
+                        //    FilePosition fp = X.GetPosition(path + "kmf.kmf", fileName);
+
+                        //    X.ReadFromFile(fullName, fileName, fp.OffSet, fp.Length);
+
+                        //}
+
+                        //List<string> list = new List<string> { "ОКВЭД-2", "ОКВЭД" };
+                        //object[] oPrm = new object[] { "Справочник ОКВЭД", "EcoursCCont.CheckedTreeViewControl", "select * from OKVED", new List<string>() };
+                        //ReferenceBook form = new ReferenceBook(10, oPrm, new object[] { list });
+
+                        ////object[] oPrm = new object[] { "Справочник ОКТМО", "EcoursCCont.xTreeViewControl", "select * from OKTMO order by Kod" };
+                        ////ReferenceBook form = new ReferenceBook(2, oPrm);
+                        //if (form.ShowDialog() == true)
+                        //{
+
+                        //}
                         break;
                     case "Техподдержка":
                         //Uri iconUri = new Uri("pack://application:,,,/flay.ico", UriKind.RelativeOrAbsolute);
