@@ -17,6 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Threading;
+using EcoursCLib.Controls;
 
 namespace EcoursApp
 {
@@ -208,12 +209,12 @@ namespace EcoursApp
                         //EcoursWpfLibrary.Calendar.MyCalendar mc = new EcoursWpfLibrary.Calendar.MyCalendar(G.nHnd, "TestUser8");
                         //mc.Show();
 
-                        //object[] oPrm = new object[] { "Редактор", "EcoursCCont.ExtRichTextBox"};
-                        //DialogForm form = new DialogForm(oPrm);
-                        //if (form.ShowDialog() == true)
-                        //{
+                        object[] oPrm = new object[] { "Редактор", "EcoursCCont.ExtRichTextBox" };
+                        DialogForm form = new DialogForm(oPrm);
+                        if (form.ShowDialog() == true)
+                        {
 
-                        //}
+                        }
 
                         //OpenFileDialog dialog = new OpenFileDialog();
                         //dialog.Title = "Открыть";

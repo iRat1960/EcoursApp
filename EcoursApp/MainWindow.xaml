@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EcoursApp"
-        xmlns:control="clr-namespace:EcoursCCont.Controls;assembly=EcoursCCont"
+        xmlns:control="clr-namespace:EcoursCLib.Controls;assembly=EcoursCLib"
         mc:Ignorable="d"
         Title="АСУ ЭКОЮРС" MinHeight="640" MinWidth="800" Icon="flay.ico" x:Name="main"
         WindowState="Minimized" ContentRendered="Window_ContentRendered" Closing="Window_Closing"
