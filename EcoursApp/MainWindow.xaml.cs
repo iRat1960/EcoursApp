@@ -189,7 +189,6 @@ namespace EcoursApp
                 }
             }
         }
-
         /// <summary>
         /// Отработка события нажатия статических кнопки боковой панели
         /// </summary>
@@ -206,15 +205,20 @@ namespace EcoursApp
                 {
                     case "Юридическая помощь":
 
+                        string cmnd = "exec EcoursDOC.dbo.up_internaldocs 1";
+                        DataView dv = X.SQLE(G.nHnd, cmnd, "qTemp");
+
+                        int ct = dv != null ? dv.Count : 0;
+
                         //EcoursWpfLibrary.Calendar.MyCalendar mc = new EcoursWpfLibrary.Calendar.MyCalendar(G.nHnd, "TestUser8");
                         //mc.Show();
 
-                        object[] oPrm = new object[] { "Редактор", "EcoursCCont.ExtRichTextBox" };
-                        DialogForm form = new DialogForm(oPrm);
-                        if (form.ShowDialog() == true)
-                        {
+                        //object[] oPrm = new object[] { "Редактор", "EcoursCCont.ExtRichTextBox" };
+                        //DialogForm form = new DialogForm(oPrm);
+                        //if (form.ShowDialog() == true)
+                        //{
 
-                        }
+                        //}
 
                         //OpenFileDialog dialog = new OpenFileDialog();
                         //dialog.Title = "Открыть";
