@@ -1,7 +1,6 @@
 ﻿using EcoursApp.Forms;
 using EcoursCCont;
 using EcoursCCont.Controls;
-using EcoursCLib.Forms;
 using EcoursCCont.Pages;
 using EcoursXLib;
 using System;
@@ -44,7 +43,6 @@ namespace EcoursApp
         {
             G.nTypeConnect = Properties.Settings.Default.nTypeConnect;
             G.cAppName = Properties.Settings.Default.cAppName;
-            G.cVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             G.cExtension = Properties.Settings.Default.cExtension;
             G.nStyleKod = Properties.Settings.Default.nStyleKod;
             G.cUser = Properties.Settings.Default.cUser;
@@ -65,13 +63,21 @@ namespace EcoursApp
             G.flEnabledStyle = Properties.Settings.Default.flEnabledStyle;
             G.flKeyInBottom = Properties.Settings.Default.flKeyInBottom;
             G.flStyleInTop = Properties.Settings.Default.flStyleInTop;
+            G.HumanFlags = Properties.Settings.Default.Flags;
+            G.cDataStore = Properties.Settings.Default.DataStore;
+            G.cTemp = Properties.Settings.Default.Temp;
+            G.cDataRootDir = Properties.Settings.Default.DataRootDir;
+
+            G.cVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             G.cAppRootDir = Environment.CurrentDirectory;
+            G.cDownloads = X.KnownFolders.GetPath(X.KnownFolder.Downloads);
             G.cDefaultAssemblyName = "EcoursСCont.FX";
+
             G.SqlConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             string[] array = G.SqlConnectionString.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
             G.cDataSource = array.FirstOrDefault(o => o.Contains("Data Source=")).Replace("Data Source=", "");
             G.cBaseSQL = array.FirstOrDefault(o => o.Contains("Initial Catalog=")).Replace("Initial Catalog=", "");
-            G.HumanFlags = Properties.Settings.Default.Flags;
+            
             X.DataReceived += ReceivedMessage;
             ThemeChange();
             List<string> list = new List<string> { "UUID", "ADID", "PCID" };
@@ -83,7 +89,7 @@ namespace EcoursApp
             G.Email = "xairat1960@gmail.com";
             G.EmailPwd = "abdoszsattvzhsba";
 
-            
+
             //*** Для тестирования ***
             //X.SQLEAsync(new Action<dynamic>(
             //    delegate (dynamic views)
@@ -148,6 +154,10 @@ namespace EcoursApp
             Properties.Settings.Default.flStyleInTop = G.flStyleInTop;
             Properties.Settings.Default.Flags = G.HumanFlags;
             Properties.Settings.Default.UUID = G.UUID;
+            Properties.Settings.Default.DataStore = G.cDataStore;
+            Properties.Settings.Default.Temp = G.cTemp;
+            Properties.Settings.Default.DataRootDir = G.cDataRootDir;
+
             Properties.Settings.Default.Save();
 
             if (G.nHnd != null)
@@ -205,10 +215,10 @@ namespace EcoursApp
                 {
                     case "Юридическая помощь":
 
-                        string cmnd = "exec EcoursDOC.dbo.up_internaldocs 1";
-                        DataView dv = X.SQLE(G.nHnd, cmnd, "qTemp");
+                        //string download = Environment.GetEnvironmentVariable("USERPROFILE") + @"\" + "Downloads";
+                        //string down = Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders", "{374DE290-123F-4565-9164-39C4925E467B}", String.Empty).ToString();
+                        //string path = X.KnownFolders.GetPath(X.KnownFolder.Downloads);
 
-                        int ct = dv != null ? dv.Count : 0;
 
                         //EcoursWpfLibrary.Calendar.MyCalendar mc = new EcoursWpfLibrary.Calendar.MyCalendar(G.nHnd, "TestUser8");
                         //mc.Show();

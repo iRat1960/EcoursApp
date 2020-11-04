@@ -297,5 +297,41 @@ namespace EcoursApp.Properties {
                 this["Flags"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\DataStore")]
+        public string DataStore {
+            get {
+                return ((string)(this["DataStore"]));
+            }
+            set {
+                this["DataStore"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\Temp")]
+        public string Temp {
+            get {
+                return ((string)(this["Temp"]));
+            }
+            set {
+                this["Temp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\SQLDB\\EDOC")]
+        public string DataRootDir {
+            get {
+                return ((string)(this["DataRootDir"]));
+            }
+            set {
+                this["DataRootDir"] = value;
+            }
+        }
     }
 }
