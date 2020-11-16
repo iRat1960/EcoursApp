@@ -15,6 +15,7 @@
     <None Remove="Images\avatar.jpg" />
     <None Remove="Images\cheese.png" />
     <None Remove="Images\cheesew.png" />
+    <None Remove="Images\message.png" />
     <None Remove="Images\network.png" />
     <None Remove="Images\networkw.png" />
     <None Remove="Images\networkw_alarm.png" />
@@ -68,6 +69,7 @@
     <Resource Include="Images\avatar.jpg" />
     <Resource Include="Images\cheese.png" />
     <Resource Include="Images\cheesew.png" />
+    <Resource Include="Images\message.png" />
     <Resource Include="Images\network.png" />
     <Resource Include="Images\networkw.png" />
     <Resource Include="Images\networkw_alarm.png" />

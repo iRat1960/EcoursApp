@@ -131,6 +131,7 @@ namespace EcoursApp.Forms
                         {
                             DialogResult = false;
                         }
+                        passwordBox.Password = "";
                         var element = e.OriginalSource as UIElement;
                         e.Handled = true;
                         element.MoveFocus(new TraversalRequest(FocusNavigationDirection.Previous));

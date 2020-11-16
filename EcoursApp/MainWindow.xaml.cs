@@ -27,7 +27,7 @@ namespace EcoursApp
     {
         DataView Accounts;
         bool IsOpenLeftPanel = false, IsOpenTopPanel = false;
-        int HomePageId = 1;
+        int HomePageId = 1, MessengerType = 0;
         DispatcherTimer timer;
         static readonly string runtimeDirectory = System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory();
 
@@ -404,11 +404,63 @@ namespace EcoursApp
                 frame.GoForward();
             }
         }
+        /// <summary>
+        /// Открыть/Скрыть месенджер
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void chatOpen_Click(object sender, RoutedEventArgs e)
+        {
+            if (gridChat.Visibility == Visibility.Visible)
+            {
+                gridChat.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                gridChat.Visibility = Visibility.Visible;
+                ShowMessenger();
+            }
+        }
+        /// <summary>
+        /// Скрыть месенджер
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void chatClose_Click(object sender, RoutedEventArgs e)
+        {
+            gridChat.Visibility = Visibility.Collapsed;
+        }
+        /// <summary>
+        /// Выбор работы с Чатом или Задачами
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonChat_Click(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+            switch(b.Name)
+            {
+                case "buttonChat1":
+                    lblChat.Content = "Чаты";
+                    imgChat.Source = new BitmapImage(new Uri("pack://application:,,,/EcoursCLib;component/Images/Black24x24/chats.png", UriKind.RelativeOrAbsolute));
+                    MessengerType = 0;
+                    break;
+                case "buttonChat2":
+                    lblChat.Content = "Задачи";
+                    imgChat.Source = new BitmapImage(new Uri("pack://application:,,,/EcoursCLib;component/Images/Black24x24/message.png", UriKind.RelativeOrAbsolute));
+                    MessengerType = 1;
+                    break;
+                case "buttonChat3":
+                    lblChat.Content = "Настройки";
+                    MessengerType = 2;
+                    break;
+            }
+        }
 
         #endregion
 
         #region --- Методы ---
-        
+
         /// <summary>
         /// Обратный вызов для сообщений из библиотеки
         /// </summary>
@@ -514,6 +566,10 @@ namespace EcoursApp
                     comboBox.SelectedIndex = 0;
                 }
                 GenTopMenu();
+                if (gridChat.Visibility == Visibility.Visible)
+                {
+                    ShowMessenger();
+                }
             }
             else
             {
@@ -652,6 +708,21 @@ namespace EcoursApp
             };
             win.Content = new SetupPageMain();
             win.Show();
+        }
+        /// <summary>
+        /// Обновление информации месенджера
+        /// </summary>
+        private void ShowMessenger()
+        {
+            if (MessengerType == 0)
+            {
+
+                lblChat1.Content = "1";
+            }
+            else
+            { }
+            lblChat1.Visibility = lblChat1.Content.Equals(string.Empty) ? Visibility.Hidden : Visibility.Visible;
+            lblChat2.Visibility = lblChat2.Content.Equals(string.Empty) ? Visibility.Hidden : Visibility.Visible;
         }
         /// <summary>
         /// Установка цветовой схемы
