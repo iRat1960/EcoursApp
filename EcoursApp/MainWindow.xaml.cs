@@ -69,6 +69,7 @@ namespace EcoursApp
             G.cDataStore = Properties.Settings.Default.DataStore;
             G.cTemp = Properties.Settings.Default.Temp;
             G.cDataRootDir = Properties.Settings.Default.DataRootDir;
+            G.flChatAndTasks = Properties.Settings.Default.flChatAndTasks;
 
             G.cVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             G.cAppRootDir = Environment.CurrentDirectory;
@@ -90,7 +91,6 @@ namespace EcoursApp
 
             G.Email = "xairat1960@gmail.com";
             G.EmailPwd = "abdoszsattvzhsba";
-
 
             //*** Для тестирования ***
             //X.SQLEAsync(new Action<dynamic>(
@@ -133,6 +133,7 @@ namespace EcoursApp
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            gridChat?.Close();
             Properties.Settings.Default.nTypeConnect = G.nTypeConnect;
             Properties.Settings.Default.cAppName = G.cAppName;
             Properties.Settings.Default.cExtension = G.cExtension;
@@ -159,6 +160,7 @@ namespace EcoursApp
             Properties.Settings.Default.DataStore = G.cDataStore;
             Properties.Settings.Default.Temp = G.cTemp;
             Properties.Settings.Default.DataRootDir = G.cDataRootDir;
+            Properties.Settings.Default.flChatAndTasks = G.flChatAndTasks;
 
             Properties.Settings.Default.Save();
 
@@ -273,6 +275,7 @@ namespace EcoursApp
                         break;
                     case "Авторизация":
                     case "Сменить пользователя":
+                        gridChat?.Close();
                         ShowPwdWidnow(s);
                         break;
                     case "Параметры":
@@ -545,7 +548,7 @@ namespace EcoursApp
                     comboBox.SelectedIndex = 0;
                 }
                 GenTopMenu();
-                if (true)
+                if (G.flChatAndTasks)
                 {
                     gridChat = new ChatAndTask(this)
                     {
@@ -555,8 +558,10 @@ namespace EcoursApp
                     Grid.SetRow(gridChat, 2);
                     Grid.SetColumn(gridChat, 1);
                     grid1.Children.Add(gridChat);
-                    gridChat.ShowMessenger();
+                    sbItemChat.Visibility = Visibility.Visible;
                 }
+                else
+                    sbItemChat.Visibility = Visibility.Collapsed;
             }
             else
             {

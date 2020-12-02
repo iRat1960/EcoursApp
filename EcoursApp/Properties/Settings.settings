@@ -80,5 +80,8 @@
     <Setting Name="DataRootDir" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\SQLDB\EDOC</Value>
     </Setting>
+    <Setting Name="flChatAndTasks" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
