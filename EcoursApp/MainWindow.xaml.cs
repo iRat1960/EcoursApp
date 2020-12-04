@@ -70,6 +70,10 @@ namespace EcoursApp
             G.cTemp = Properties.Settings.Default.Temp;
             G.cDataRootDir = Properties.Settings.Default.DataRootDir;
             G.flChatAndTasks = Properties.Settings.Default.flChatAndTasks;
+            if (!Directory.Exists(G.cTemp))
+            {
+                Directory.CreateDirectory(G.cTemp);
+            }
 
             G.cVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             G.cAppRootDir = Environment.CurrentDirectory;
