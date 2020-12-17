@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <PackageIcon>flay.ico</PackageIcon>
     <ApplicationIcon>flay.ico</ApplicationIcon>
@@ -56,16 +56,16 @@
 
   <ItemGroup>
     <Reference Include="EcoursCCont">
-      <HintPath>..\..\EcoursCCont\EcoursCCont\bin\Debug\netcoreapp3.1\EcoursCCont.dll</HintPath>
+      <HintPath>..\..\EcoursCCont\EcoursCCont\bin\Debug\net5.0-windows\EcoursCCont.dll</HintPath>
     </Reference>
     <Reference Include="EcoursCLib">
-      <HintPath>..\..\EcoursCLib\EcoursCLib\bin\Debug\netcoreapp3.1\EcoursCLib.dll</HintPath>
+      <HintPath>..\..\EcoursCLib\EcoursCLib\bin\Debug\net5.0-windows\EcoursCLib.dll</HintPath>
     </Reference>
     <Reference Include="EcoursWpfLibrary">
-      <HintPath>..\..\EcoursWpflLibrary\EcoursWpflLibrary\bin\Debug\netcoreapp3.1\EcoursWpfLibrary.dll</HintPath>
+      <HintPath>..\..\EcoursWpflLibrary\EcoursWpflLibrary\bin\Debug\net5.0-windows\EcoursWpfLibrary.dll</HintPath>
     </Reference>
     <Reference Include="EcoursXLib">
-      <HintPath>..\..\EcoursXLib\EcoursXLib\bin\Debug\netstandard2.0\EcoursXLib.dll</HintPath>
+      <HintPath>..\..\EcoursXLib\EcoursXLib\bin\Debug\net5.0-windows\EcoursXLib.dll</HintPath>
     </Reference>
   </ItemGroup>
 
