@@ -18,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Threading;
 using EcoursCLib.Controls;
 using System.IO;
+using EcoursCLib.Forms;
 
 namespace EcoursApp
 {
@@ -79,6 +80,7 @@ namespace EcoursApp
             G.cAppRootDir = Environment.CurrentDirectory;
             G.cDownloads = X.KnownFolders.GetPath(X.KnownFolder.Downloads);
             G.cDefaultAssemblyName = "EcoursСCont.FX";
+            G.WinOwner = this;
 
             G.SqlConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             string[] array = G.SqlConnectionString.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
@@ -543,6 +545,7 @@ namespace EcoursApp
                 pwd = new TopWindow();
             if (pwd.ShowDialog() == true)
             {
+                tb2.Text = G.cUser;
                 string cmnd = "exec up_getaccounts " + G.nUserId;
                 Accounts = X.SQLE(G.nHnd, cmnd, "qTemp");
                 if (Accounts != null && Accounts.Count > 0)
