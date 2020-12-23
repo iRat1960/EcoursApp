@@ -71,16 +71,20 @@ namespace EcoursApp
             G.cTemp = Properties.Settings.Default.Temp;
             G.cDataRootDir = Properties.Settings.Default.DataRootDir;
             G.flChatAndTasks = Properties.Settings.Default.flChatAndTasks;
+
+            G.cVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            G.cAppRootDir = Environment.CurrentDirectory;
+            G.cDefaultAssemblyName = "EcoursСCont.FX";
+            G.WinOwner = this;
+
             if (!Directory.Exists(G.cTemp))
             {
                 Directory.CreateDirectory(G.cTemp);
             }
-
-            G.cVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            G.cAppRootDir = Environment.CurrentDirectory;
+            // только для Windows
             G.cDownloads = X.KnownFolders.GetPath(X.KnownFolder.Downloads);
-            G.cDefaultAssemblyName = "EcoursСCont.FX";
-            G.WinOwner = this;
+            G.cDocuments = X.KnownFolders.GetPath(X.KnownFolder.Documents);
+            G.cPictures = X.KnownFolders.GetPath(X.KnownFolder.Pictures);
 
             G.SqlConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             string[] array = G.SqlConnectionString.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
