@@ -438,15 +438,31 @@ namespace EcoursApp
                     gridChat.ShowMessenger();
                 }
             }
+            else
+            {
+                OpenChatAndTask();
+            }
         }
         /// <summary>
-        /// Скрыть месенджер
+        /// Скрыть месенжер
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         public void chatClose_Click(object sender, RoutedEventArgs e)
         {
             gridChat.Visibility = Visibility.Collapsed;
+        }
+        /// <summary>
+        /// Выход из месенжера
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void chatExit_Click(object sender, RoutedEventArgs e)
+        {
+            gridChat?.Close();
+            gridChat.Visibility = Visibility.Collapsed;
+            grid1.Children.Remove(gridChat);
+            gridChat = null;
         }
 
         #endregion
@@ -561,15 +577,7 @@ namespace EcoursApp
                 GenTopMenu();
                 if (G.flChatAndTasks)
                 {
-                    gridChat = new ChatAndTask(this)
-                    {
-                        HorizontalAlignment = HorizontalAlignment.Right,
-                        Margin = new Thickness(0, 40, 20, 20)
-                    };
-                    Grid.SetRow(gridChat, 2);
-                    Grid.SetColumn(gridChat, 1);
-                    grid1.Children.Add(gridChat);
-                    sbItemChat.Visibility = Visibility.Visible;
+                    OpenChatAndTask();
                 }
                 else
                     sbItemChat.Visibility = Visibility.Collapsed;
@@ -578,6 +586,21 @@ namespace EcoursApp
             {
                 Close();
             }
+        }
+        /// <summary>
+        /// Активировать задачу Чат
+        /// </summary>
+        private void OpenChatAndTask()
+        {
+            gridChat = new ChatAndTask(this)
+            {
+                HorizontalAlignment = HorizontalAlignment.Right,
+                Margin = new Thickness(0, 40, 20, 20)
+            };
+            Grid.SetRow(gridChat, 2);
+            Grid.SetColumn(gridChat, 1);
+            grid1.Children.Add(gridChat);
+            sbItemChat.Visibility = Visibility.Visible;
         }
         /// <summary>
         /// Формирование основного меню (боковой панели)
