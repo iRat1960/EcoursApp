@@ -345,5 +345,41 @@ namespace EcoursApp.Properties {
                 this["flChatAndTasks"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("32, 32, 32")]
+        public global::System.Drawing.Color ChatWallPaper {
+            get {
+                return ((global::System.Drawing.Color)(this["ChatWallPaper"]));
+            }
+            set {
+                this["ChatWallPaper"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ChatPathImg {
+            get {
+                return ((string)(this["ChatPathImg"]));
+            }
+            set {
+                this["ChatPathImg"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ChatPathDoc {
+            get {
+                return ((string)(this["ChatPathDoc"]));
+            }
+            set {
+                this["ChatPathDoc"] = value;
+            }
+        }
     }
 }

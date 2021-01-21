@@ -83,5 +83,14 @@
     <Setting Name="flChatAndTasks" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="ChatWallPaper" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">32, 32, 32</Value>
+    </Setting>
+    <Setting Name="ChatPathImg" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ChatPathDoc" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

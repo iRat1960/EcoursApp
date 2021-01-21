@@ -19,6 +19,7 @@ using System.Windows.Threading;
 using EcoursCLib.Controls;
 using System.IO;
 using EcoursCLib.Forms;
+using System.Windows.Media;
 
 namespace EcoursApp
 {
@@ -71,6 +72,10 @@ namespace EcoursApp
             G.cTemp = Properties.Settings.Default.Temp;
             G.cDataRootDir = Properties.Settings.Default.DataRootDir;
             G.flChatAndTasks = Properties.Settings.Default.flChatAndTasks;
+            System.Drawing.Color color = Properties.Settings.Default.ChatWallPaper;
+            G.ChatWallPaper = new SolidColorBrush(Color.FromArgb(color.A, color.R, color.G, color.B));
+            G.ChatPathImg = Properties.Settings.Default.ChatPathImg;
+            G.ChatPathDoc = Properties.Settings.Default.ChatPathDoc;
 
             G.cVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             G.cAppRootDir = Environment.CurrentDirectory;
@@ -85,6 +90,8 @@ namespace EcoursApp
             G.cDownloads = X.KnownFolders.GetPath(X.KnownFolder.Downloads);
             G.cDocuments = X.KnownFolders.GetPath(X.KnownFolder.Documents);
             G.cPictures = X.KnownFolders.GetPath(X.KnownFolder.Pictures);
+            if (G.ChatPathDoc == string.Empty) G.ChatPathDoc = G.cDocuments;
+            if (G.ChatPathImg == string.Empty) G.ChatPathImg = G.cPictures;
 
             G.SqlConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             string[] array = G.SqlConnectionString.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
@@ -171,6 +178,10 @@ namespace EcoursApp
             Properties.Settings.Default.Temp = G.cTemp;
             Properties.Settings.Default.DataRootDir = G.cDataRootDir;
             Properties.Settings.Default.flChatAndTasks = G.flChatAndTasks;
+            Properties.Settings.Default.ChatPathImg = G.ChatPathImg;
+            Properties.Settings.Default.ChatPathDoc = G.ChatPathDoc;
+            Color color = ((SolidColorBrush)G.ChatWallPaper).Color;
+            Properties.Settings.Default.ChatWallPaper = new System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B)).Color;
 
             Properties.Settings.Default.Save();
 
