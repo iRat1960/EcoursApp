@@ -18,14 +18,10 @@ using System.Windows.Navigation;
 using System.Windows.Threading;
 using EcoursCLib.Controls;
 using System.IO;
-using EcoursCLib.Forms;
 using System.Windows.Media;
 
 namespace EcoursApp
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         DataView Accounts;
@@ -68,20 +64,20 @@ namespace EcoursApp
             G.flKeyInBottom = Properties.Settings.Default.flKeyInBottom;
             G.flStyleInTop = Properties.Settings.Default.flStyleInTop;
             G.HumanFlags = Properties.Settings.Default.Flags;
-            G.cDataStore = Properties.Settings.Default.DataStore;
-            G.cTemp = Properties.Settings.Default.Temp;
+            //G.cDataStore = Properties.Settings.Default.DataStore;
+            //G.cTemp = Properties.Settings.Default.Temp;
             G.cDataRootDir = Properties.Settings.Default.DataRootDir;
             G.flChatAndTasks = Properties.Settings.Default.flChatAndTasks;
             System.Drawing.Color color = Properties.Settings.Default.ChatWallPaper;
             G.ChatWallPaper = new SolidColorBrush(Color.FromArgb(color.A, color.R, color.G, color.B));
             G.ChatPathImg = Properties.Settings.Default.ChatPathImg;
             G.ChatPathDoc = Properties.Settings.Default.ChatPathDoc;
-
+            
             G.cVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            G.cAppRootDir = Environment.CurrentDirectory;
             G.cDefaultAssemblyName = "EcoursСCont.FX";
             G.WinOwner = this;
-
+            G.cAppRootDir = Environment.CurrentDirectory;
+            G.cTemp = G.cAppRootDir + @"\Temp";
             if (!Directory.Exists(G.cTemp))
             {
                 Directory.CreateDirectory(G.cTemp);
@@ -174,8 +170,8 @@ namespace EcoursApp
             Properties.Settings.Default.flStyleInTop = G.flStyleInTop;
             Properties.Settings.Default.Flags = G.HumanFlags;
             Properties.Settings.Default.UUID = G.UUID;
-            Properties.Settings.Default.DataStore = G.cDataStore;
-            Properties.Settings.Default.Temp = G.cTemp;
+            //Properties.Settings.Default.DataStore = G.cDataStore;
+            //Properties.Settings.Default.Temp = G.cTemp;
             Properties.Settings.Default.DataRootDir = G.cDataRootDir;
             Properties.Settings.Default.flChatAndTasks = G.flChatAndTasks;
             Properties.Settings.Default.ChatPathImg = G.ChatPathImg;

@@ -12,6 +12,12 @@
         Style="{DynamicResource WindowStyle}" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged">
 
     <Window.Resources>
+        <!--<ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/EcoursCLib;component/Themes/AppIcons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <f:VisibilityConverter x:Key="VisibilityConverter"/>
+        </ResourceDictionary>-->
         <f:VisibilityConverter x:Key="VisibilityConverter"/>
     </Window.Resources>
     <Grid x:Name="grid1" Style="{DynamicResource GridMain}">

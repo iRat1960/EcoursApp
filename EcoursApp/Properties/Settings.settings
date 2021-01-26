@@ -71,12 +71,6 @@
     <Setting Name="Flags" Type="EcoursXLib.HumanFlag" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="DataStore" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\DataStore</Value>
-    </Setting>
-    <Setting Name="Temp" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\Temp</Value>
-    </Setting>
     <Setting Name="DataRootDir" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\SQLDB\EDOC</Value>
     </Setting>
