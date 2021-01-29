@@ -86,6 +86,7 @@ namespace EcoursApp
             G.cDownloads = X.KnownFolders.GetPath(X.KnownFolder.Downloads);
             G.cDocuments = X.KnownFolders.GetPath(X.KnownFolder.Documents);
             G.cPictures = X.KnownFolders.GetPath(X.KnownFolder.Pictures);
+
             if (G.ChatPathDoc == string.Empty) G.ChatPathDoc = G.cDocuments;
             if (G.ChatPathImg == string.Empty) G.ChatPathImg = G.cPictures;
 
@@ -104,6 +105,8 @@ namespace EcoursApp
 
             G.Email = "xairat1960@gmail.com";
             G.EmailPwd = "abdoszsattvzhsba";
+
+            G.flChatAndTasks = false;
 
             //*** Для тестирования ***
             //X.SQLEAsync(new Action<dynamic>(
