@@ -52,11 +52,7 @@
     <Style x:Key="UserControl" TargetType="UserControl">
         <Setter Property="Background" Value="LightBlue"/>
     </Style>
-    <Style x:Key="TabControlStyle" TargetType="TabControl">
-        <Setter Property="Background" Value="LightGray"/>
-        <Setter Property="MinHeight" Value="48"/>
-        <Setter Property="FontSize" Value="12"/>
-    </Style>
+    
     <Style x:Key="WindowStyle" TargetType="Window">
         <Setter Property="Background" Value="White"/>
     </Style>
@@ -65,14 +61,23 @@
     </Style>
     <Style x:Key="StackPanelMenu" TargetType="StackPanel">
         <Setter Property="Background" Value="LightBlue"/>
-        <Setter Property="Width" Value="40"/>
+        <!--<Setter Property="Width" Value="40"/>-->
     </Style>
     <Style x:Key="StatusBar1" TargetType="StatusBar">
         <Setter Property="Background" Value="LightGray"/>
     </Style>
-
-    <SolidColorBrush x:Key="TabItem.Static.Background" Color="Black"/>
-    <SolidColorBrush x:Key="TabItem.Static.Border" Color="Black"/>
+    
+    <Style x:Key="TabControlStyle" TargetType="TabControl">
+        <Setter Property="Background" Value="LightGray"/>
+        <Setter Property="MinHeight" Value="48"/>
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+    
+    <LinearGradientBrush x:Key="TabItem.Static.Background" EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="#F0F0F0" Offset="0.0"/>
+        <GradientStop Color="#E5E5E5" Offset="1.0"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="TabItem.Static.Border" Color="DimGray"/>
     <LinearGradientBrush x:Key="TabItem.MouseOver.Background" EndPoint="0,1" StartPoint="0,0">
         <GradientStop Color="#ECF4FC" Offset="0.0"/>
         <GradientStop Color="#DCECFC" Offset="1.0"/>
@@ -88,7 +93,7 @@
         <Setter Property="Background" Value="{StaticResource TabItem.Static.Background}"/>
         <Setter Property="BorderBrush" Value="{StaticResource TabItem.Static.Border}"/>
         <Setter Property="Margin" Value="0"/>
-        <Setter Property="Padding" Value="6,2,6,2"/>
+        <Setter Property="Padding" Value="8,6,8,6"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="Template">
@@ -97,10 +102,10 @@
                     <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
                         <Border x:Name="mainBorder" Background="{TemplateBinding Background}" 
                                     BorderThickness="1,1,1,0" BorderBrush="{TemplateBinding BorderBrush}" 
-                                    Margin="0" CornerRadius="4,4,0,0">
+                                    Margin="0" CornerRadius="2,4,0,0">
                             <Border x:Name="innerBorder" Background="{StaticResource TabItem.Selected.Background}" 
                                     BorderThickness="1,1,1,0" BorderBrush="{StaticResource TabItem.Selected.Border}" 
-                                    Margin="-1" CornerRadius="4,4,0,0" Opacity="0"/>
+                                    Margin="-1" CornerRadius="2,4,0,0" Opacity="0"/>
                         </Border>
                         <ContentPresenter x:Name="contentPresenter" ContentSource="Header" Focusable="False" HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
                     </Grid>

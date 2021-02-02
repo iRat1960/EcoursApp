@@ -493,7 +493,7 @@ namespace EcoursApp
         /// <param name="tag"></param>
         private void ExecMethod(TabItemTag tag)
         {
-            if (tag.cMethod.Length > 0)
+            if (tag.nType >= 4 || tag.nType < 4 && tag.cMethod.Length > 0)
             {
                 object[] obj = null;
                 if (tag.IsParams) obj = FX.GetMenuParams(tag.Id);
