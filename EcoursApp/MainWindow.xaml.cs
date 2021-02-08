@@ -105,22 +105,9 @@ namespace EcoursApp
 
             G.Email = "xairat1960@gmail.com";
             G.EmailPwd = "abdoszsattvzhsba";
-
+            
             G.flChatAndTasks = false;
-
-            //*** Для тестирования ***
-            //X.SQLEAsync(new Action<dynamic>(
-            //    delegate (dynamic views)
-            //    {
-            //        if (views != null && views is DataView)
-            //        {
-            //            DataView qTemp = (DataView)views;
-            //            G.nAccountId = (int)qTemp[0].Row["Id"];
-            //            comboBox.ItemsSource = qTemp;
-            //            comboBox.SelectedIndex = 0;
-            //        }
-            //    }), "exec up_getaccounts 1", "qTemp");
-
+            
             timer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal, (object s, EventArgs ev) =>
             {
                 timeText.Text = DateTime.Now.ToString("HH:mm");
@@ -622,7 +609,7 @@ namespace EcoursApp
                 button3.ToolTip = "Сменить пользователя";
                 button3.ControlText = "Сменить пользователя";
                 ClearMenu();
-                string cmnd = "exec up_genmenu " + G.nRoleId + ",0";
+                string cmnd = "exec up_genmenu 0,0," + G.nRoleId;
                 DataView dv = X.SQLE(G.nHnd, cmnd, "qmenu");
                 if (dv != null && dv.Count > 0)
                 {
@@ -663,7 +650,7 @@ namespace EcoursApp
             if (tabControl.Items.Count > 0) tabControl.Items.Clear();
             int idx = 0;
             // Выбор закладок
-            string cmnd = "exec up_genmenu " + G.nRoleId + "," + key.ToString();
+            string cmnd = "exec up_genmenu 0," + key.ToString() + "," + G.nRoleId;
             DataView dv = X.SQLE(G.nHnd, cmnd, "qmenu");
             if (dv != null && dv.Count > 0)
             {
@@ -679,7 +666,7 @@ namespace EcoursApp
                     ud.AddHandler(System.Windows.Controls.Primitives.ButtonBase.ClickEvent, new RoutedEventHandler(Tib_Click));
                     sp.Children.Add(ud);
                     // Выбор кнопок на закладке
-                    cmnd = "exec up_genmenu " + G.nRoleId + "," + row["Sid"].ToString();
+                    cmnd = "exec up_genmenu 0," + row["Sid"].ToString() + "," + G.nRoleId;
                     DataView dvb = X.SQLE(G.nHnd, cmnd, "qmenu");
                     if (dvb != null && dvb.Count > 0)
                     {
