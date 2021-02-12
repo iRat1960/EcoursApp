@@ -106,7 +106,7 @@ namespace EcoursApp
             G.Email = "xairat1960@gmail.com";
             G.EmailPwd = "abdoszsattvzhsba";
             
-            G.flChatAndTasks = false;
+            G.flChatAndTasks = true;
             
             timer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal, (object s, EventArgs ev) =>
             {
@@ -609,13 +609,14 @@ namespace EcoursApp
                 button3.ToolTip = "Сменить пользователя";
                 button3.ControlText = "Сменить пользователя";
                 ClearMenu();
-                string cmnd = "exec up_genmenu 0,0," + G.nRoleId;
+                string cmnd = "exec up_genmenu 0," + G.nUserId + "," + G.nRoleId;
                 DataView dv = X.SQLE(G.nHnd, cmnd, "qmenu");
                 if (dv != null && dv.Count > 0)
                 {
                     foreach (DataRow row in dv.Table.Rows)
                     {
                         string tool = (bool)row["IsToolTip"] ? "true" : "false";
+                        bool IsLocked = (bool)row["IsLocked"];
                         InfoButton ib = new InfoButton(new string[] { row["Template"].ToString(), row["MenuText"].ToString(), tool });
                         InfoButtonTag tag = new InfoButtonTag
                         {
@@ -627,6 +628,7 @@ namespace EcoursApp
                             IsParams = Convert.ToBoolean(row["IsParams"])
                         };
                         ib.Tag = tag;
+                        ib.IsEnabled = !IsLocked;
                         ib.SetWidth(IsOpenLeftPanel ? 180 : 40);
                         ib.AddHandler(System.Windows.Controls.Primitives.ButtonBase.ClickEvent, new RoutedEventHandler(InfoButton_Click));
                         sp2.Children.Add(ib);
@@ -645,12 +647,13 @@ namespace EcoursApp
         /// <param name="key"></param>
         private void SetTabControl(int key)
         {
+            bool IsLocked;
             TabItem tabItem;
             StackPanel sp;
             if (tabControl.Items.Count > 0) tabControl.Items.Clear();
             int idx = 0;
-            // Выбор закладок
-            string cmnd = "exec up_genmenu 0," + key.ToString() + "," + G.nRoleId;
+            // Выбор вкладок
+            string cmnd = "exec up_genmenu " + key.ToString() + "," + G.nUserId + "," + G.nRoleId;
             DataView dv = X.SQLE(G.nHnd, cmnd, "qmenu");
             if (dv != null && dv.Count > 0)
             {
@@ -665,14 +668,15 @@ namespace EcoursApp
                     UpDown ud = new UpDown();
                     ud.AddHandler(System.Windows.Controls.Primitives.ButtonBase.ClickEvent, new RoutedEventHandler(Tib_Click));
                     sp.Children.Add(ud);
-                    // Выбор кнопок на закладке
-                    cmnd = "exec up_genmenu 0," + row["Sid"].ToString() + "," + G.nRoleId;
+                    // Выбор кнопок на вкладке
+                    cmnd = "exec up_genmenu " + row["Id"].ToString() + "," + G.nUserId + "," + G.nRoleId;
                     DataView dvb = X.SQLE(G.nHnd, cmnd, "qmenu");
                     if (dvb != null && dvb.Count > 0)
                     {
                         foreach (DataRow dr in dvb.Table.Rows)
                         {
                             string tool = (bool)dr["IsToolTip"] ? "true" : "false";
+                            IsLocked = (bool)dr["IsLocked"];
                             TabItemButton tib = new TabItemButton(new string[] { dr["Template"].ToString(), dr["MenuText"].ToString(), tool });
                             TabItemTag tag = new TabItemTag
                             {
@@ -683,15 +687,18 @@ namespace EcoursApp
                                 IsParams = Convert.ToBoolean(dr["IsParams"])
                             };
                             tib.Tag = tag;
+                            tib.IsEnabled = !IsLocked;
                             tib.AddHandler(System.Windows.Controls.Primitives.ButtonBase.ClickEvent, new RoutedEventHandler(TabItemButton_Click));
                             tib.SetSize(IsOpenTopPanel);
                             sp.Children.Add(tib);
                         }
                     }
+                    bool IsUnLocked = !(bool)row["IsLocked"];
                     tabItem = new TabItem()
                     {
                         Style = Application.Current.Resources["TabItemStyle1"] as Style,
                         Header = " " + row["MenuText"].ToString() + " ",
+                        IsEnabled = IsUnLocked,
                         Content = sp
                     };
                     tabControl.Items.Add(tabItem);
