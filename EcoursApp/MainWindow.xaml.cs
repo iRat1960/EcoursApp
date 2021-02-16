@@ -106,7 +106,7 @@ namespace EcoursApp
             G.Email = "xairat1960@gmail.com";
             G.EmailPwd = "abdoszsattvzhsba";
             
-            G.flChatAndTasks = true;
+            G.flChatAndTasks = false;
             
             timer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal, (object s, EventArgs ev) =>
             {
