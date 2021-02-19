@@ -26,12 +26,12 @@
                        Height="24" Margin="0,10,0,0"/>
             <Label x:Name="label1" HorizontalAlignment="Center" Foreground="White" 
                    Visibility="Collapsed" Content="Введите имя пользователя, роль и пароль"/>
-            <TextBox x:Name="loginBox" Text="" MinHeight="23" Width="221" Margin="0,4,0,10" 
+            <TextBox x:Name="loginBox" Text="" MinHeight="24" Width="221" Margin="0,4,0,10" 
                      HorizontalAlignment="Center" VerticalContentAlignment="Center" 
                      Visibility="Collapsed" LostFocus="loginBox_LostFocus" KeyDown="control_KeyDown"/>
-            <ComboBox x:Name="roleBox" Width="221" MinHeight="21" Margin="0,8,0,16"
-                      SelectedValue="Id" DisplayMemberPath="Name" 
-                      VerticalAlignment="Center" Visibility="Collapsed" KeyDown="control_KeyDown"/>
+            <ComboBox x:Name="roleBox" Width="221" Height="24" Margin="0,8,0,16"
+                      SelectedValue="Id" DisplayMemberPath="Name" VerticalAlignment="Center" 
+                      Visibility="Collapsed" KeyDown="control_KeyDown" SelectionChanged="roleBox_SelectionChanged"/>
             <WrapPanel x:Name="wp1" HorizontalAlignment="Center" Margin="0,10,0,10">
                 <PasswordBox x:Name="passwordBox" Width="200" MinHeight="23" VerticalContentAlignment="Center"
                        BorderBrush="Gray" KeyDown="control_KeyDown"/>
@@ -39,10 +39,10 @@
                     <Image Source="pack://application:,,,/EcoursApp;component/Images/add1_active.png"></Image>
                 </Button>
             </WrapPanel>
-            <Button x:Name="button1" Style="{StaticResource ButtonStyle}" Width="140" Visibility="Visible"
-                    Margin="10,0,10,0" Height="25" Content="Сменить пользователя" Click="button1_Click"/>
+            <Button x:Name="button1" Style="{StaticResource ButtonStyle}" Width="180" Visibility="Visible"
+                    Margin="10,0,10,4" Height="28" Content="Сменить пользователя" Click="button1_Click"/>
             <Button x:Name="button2" Style="{StaticResource ButtonStyle}" Width="140" Visibility="Visible"
-                    Margin="10,4,10,40" Height="25" Content="Сменить роль" Click="button2_Click"/>
+                    Margin="10,0,10,40" Height="28" Content="Сменить роль" Click="button2_Click"/>
         </StackPanel>
         <Button x:Name="buttonLang" Grid.Row="1" Width="42" Style="{StaticResource ButtonStyle}" 
             HorizontalAlignment="Left" Margin="8,0,0,0" Content="ENG"/>

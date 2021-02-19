@@ -12,9 +12,6 @@ using System.IO;
 
 namespace EcoursApp.Forms
 {
-    /// <summary>
-    /// Логика взаимодействия для TopWindow.xaml
-    /// </summary>
     public partial class TopWindow : Window
     {
         bool flAlarm = false;
@@ -50,7 +47,7 @@ namespace EcoursApp.Forms
                 LoadRoles();
                 text1.Text = G.cUser;
                 loginBox.Text = G.cUser;
-                Title = "Вход с ролью " + G.cRole;
+                Title = G.cRole == string.Empty ? "Внимание! Роль не указана" : ("Вход с ролью " + G.cRole);
             }
             var uriImageSource = new Uri(@"/EcoursApp;component/Images/" + uri, UriKind.RelativeOrAbsolute);
             imgNetwork.Source = new BitmapImage(uriImageSource);
@@ -87,16 +84,25 @@ namespace EcoursApp.Forms
 
         private void LoadRoles()
         {
-            string cmnd = "select a.Id,a.Name from Roles a " +
-                              "inner join UserRoles b ON b.RoleId = a.Id " +
-                              "where b.UserId in (select Id from Users where Name='" + G.cUser + "')";
-            DataView roleItems = X.SQLE(G.nHnd, cmnd, "qRole");
-            if (roleItems != null && roleItems.Count > 0)
+            string cmnd = "select a.Id,a.Name from Roles a inner join UserRoles b ON b.RoleId = a.Id " +
+                          "where b.UserId in (select Id from Users where Name='" + G.cUser + "')";
+            DataView qRoles = X.SQLE(G.nHnd, cmnd, "qRole");
+            if (qRoles != null && qRoles.Count > 0)
             {
-                roleBox.ItemsSource = roleItems;
-                roleBox.SelectedIndex = 0;
-                G.cRole = roleItems[0].Row["Name"].ToString();
-                G.nRoleId = Convert.ToInt32(roleItems[0].Row["Id"]);
+                qRoles.Sort = "Id";
+                int index = qRoles.Find(G.nRoleId);
+                roleBox.ItemsSource = qRoles;
+                roleBox.SelectedIndex = index;
+                if (qRoles.Count < 2)
+                {
+                    button2.Visibility = Visibility.Collapsed;
+                    button1.Margin = new Thickness(10, 0, 10, 60);
+                }
+            }
+            else
+            {
+                G.cRole = "";
+                G.nRoleId = 0;
             }
         }
 
@@ -112,8 +118,6 @@ namespace EcoursApp.Forms
                 if (G.fdst > 0)
                 {
                     G.cUser = Login;
-                    G.cRole = SelectedRole["Name"].ToString();
-                    G.nRoleId = Convert.ToInt32(SelectedRole["Id"]);
                     DialogResult = true;
                 }
                 else
@@ -221,6 +225,15 @@ namespace EcoursApp.Forms
             wp1.Margin = margin;
             button1.Visibility = Visibility.Collapsed;
             button2.Visibility = Visibility.Collapsed;
+        }
+
+        private void roleBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (roleBox.SelectedItem != null)
+            {
+                G.cRole = SelectedRole["Name"].ToString();
+                G.nRoleId = Convert.ToInt32(SelectedRole["Id"]);
+            }
         }
     }
 }

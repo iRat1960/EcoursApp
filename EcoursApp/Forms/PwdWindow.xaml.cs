@@ -10,9 +10,6 @@ using System.Globalization;
 
 namespace EcoursApp
 {
-    /// <summary>
-    /// Логика взаимодействия для PwdWindow.xaml
-    /// </summary>
     public partial class PwdWindow : Window
     {
         bool flAlarm = false;
@@ -38,7 +35,7 @@ namespace EcoursApp
             }
             else
             {
-                Background = new SolidColorBrush(Colors.Gray);
+                Background = new SolidColorBrush(Colors.DimGray);
                 LoadRoles();
             }
         }
@@ -50,16 +47,20 @@ namespace EcoursApp
 
         private void LoadRoles()
         {
-            string cmnd = "select a.Id,a.Name from Roles a " +
-                              "inner join UserRoles b ON b.RoleId = a.Id " +
-                              "where b.UserId in (select Id from Users where Name='" + G.cUser + "')";
-            DataView roleItems = X.SQLE(G.nHnd, cmnd, "qRole");
-            if (roleItems != null && roleItems.Count > 0)
+            string cmnd = "select a.Id,a.Name from Roles a inner join UserRoles b ON b.RoleId = a.Id " +
+                          "where b.UserId in (select Id from Users where Name='" + G.cUser + "')";
+            DataView qRoles = X.SQLE(G.nHnd, cmnd, "qRole");
+            if (qRoles != null && qRoles.Count > 0)
             {
-                roleBox.ItemsSource = roleItems;
-                roleBox.SelectedIndex = 0;
-                G.cRole = roleItems[0].Row["Name"].ToString();
-                G.nRoleId = Convert.ToInt32(roleItems[0].Row["Id"]);
+                qRoles.Sort = "Id";
+                int index = qRoles.Find(G.nRoleId);
+                roleBox.ItemsSource = qRoles;
+                roleBox.SelectedIndex = index;
+            }
+            else
+            {
+                G.cRole = "";
+                G.nRoleId = 0;
             }
         }
         
@@ -142,6 +143,15 @@ namespace EcoursApp
                 e.Handled = true;
                 element.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
             } 
+        }
+
+        private void roleBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (roleBox.SelectedItem != null)
+            {
+                G.cRole = SelectedRole["Name"].ToString();
+                G.nRoleId = Convert.ToInt32(SelectedRole["Id"]);
+            }
         }
     }
 }

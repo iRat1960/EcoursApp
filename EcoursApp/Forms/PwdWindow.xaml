@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:EcoursApp"
         mc:Ignorable="d"
         Title="Авторизация" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" 
-        Topmost="True" ResizeMode="NoResize" Icon="/EcoursApp;component/flay.ico" Height="254" 
-        Width="275" Background="Red">
+        Topmost="True" ResizeMode="NoResize" Icon="/EcoursApp;component/flay.ico" Height="250" 
+        Width="280" Background="Red">
     
     <Window.Resources>
         <LinearGradientBrush x:Key="DarkBrush" StartPoint="0,0" EndPoint="0,1">
@@ -46,27 +46,27 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Canvas Height="220" Width="265" Margin="2" Background="Gray">
-        <Grid Margin="20,16,20,20">
+    <Grid Height="224" Width="272" Margin="2" Background="#FF484848">
+        <Grid Margin="20,10,20,20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="24" />
-                <RowDefinition Height="20" />
                 <RowDefinition Height="24" />
-                <RowDefinition Height="20" />
                 <RowDefinition Height="24" />
-                <RowDefinition Height="20" />
+                <RowDefinition Height="24" />
+                <RowDefinition Height="24" />
+                <RowDefinition Height="24" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-
-            <TextBlock VerticalAlignment="Center">Укажите имя:</TextBlock>
-            <TextBox x:Name="loginBox" Grid.Row="1" MinWidth="200" LostFocus="loginBox_LostFocus" KeyDown="control_KeyDown" />
-            <TextBlock VerticalAlignment="Center" Grid.Row="2">Выберите роль:</TextBlock>
-            <ComboBox x:Name="roleBox" Grid.Row="3" MinWidth="200" Height="21" SelectedValue="Id"
-                      DisplayMemberPath="Name" VerticalAlignment="Center" KeyDown="control_KeyDown"/>
-            <TextBlock Grid.Row="4" VerticalAlignment="Center">Введите пароль:</TextBlock>
-            <PasswordBox x:Name="passwordBox" MinWidth="230" Height="20"
-                         HorizontalAlignment="Left" Grid.Row="5" 
-                         VerticalAlignment="Center" KeyDown="control_KeyDown">
+            <TextBlock Foreground="White" VerticalAlignment="Center">Укажите имя:</TextBlock>
+            <TextBox x:Name="loginBox" Grid.Row="1" LostFocus="loginBox_LostFocus" 
+                     Padding="2" KeyDown="control_KeyDown" />
+            <TextBlock Foreground="White" VerticalAlignment="Center" Grid.Row="2">Выберите роль:</TextBlock>
+            <ComboBox x:Name="roleBox" Grid.Row="3" MinWidth="200" Height="24" SelectedValue="Id"
+                      DisplayMemberPath="Name" SelectionChanged="roleBox_SelectionChanged" 
+                      VerticalAlignment="Center" KeyDown="control_KeyDown"/>
+            <TextBlock Foreground="White" Grid.Row="4" VerticalAlignment="Center">Введите пароль:</TextBlock>
+            <PasswordBox x:Name="passwordBox" HorizontalAlignment="Stretch" Grid.Row="5" 
+                         Padding="2" KeyDown="control_KeyDown">
             </PasswordBox>
             <WrapPanel Grid.Row="6" HorizontalAlignment="Right" Margin="0,24,0,0" Width="160">
                 <Button x:Name="OK" Click="Accept_Click" MinWidth="75" Margin="0,0,5,0" Content="OK"/>
@@ -76,5 +76,5 @@
                     Height="26" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
                     Content="ENG"/>
         </Grid>
-    </Canvas>
+    </Grid>
 </Window>
