@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Data;
 using System;
 using System.Globalization;
+using System.Reflection;
 
 namespace EcoursApp
 {
@@ -66,29 +67,17 @@ namespace EcoursApp
         
         private void Accept_Click(object sender, RoutedEventArgs e)
         {
-            G.fdst = X.SQLC(Login, Password);
-            if (G.fdst > 0)
-            {
-                G.cUser = Login;
-                G.cRole = SelectedRole["Name"].ToString();
-                G.nRoleId = Convert.ToInt32(SelectedRole["Id"]);
+            Type type = Owner.GetType();
+            object obj = type.InvokeMember("PwdAccept", BindingFlags.InvokeMethod, null, Owner, new object[] { Login, Password });
+            int result = (int)obj;
+            if (result == 1)
                 DialogResult = true;
-            }
             else
             {
-                G.nHnd = X.SQLC(G.SqlConnectionString);
-                if (G.fdst == -3)
-                {
-                    MessageBox.Show("Ошибка соединения с базой данных!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                if (result == -1)
                     DialogResult = false;
-                }
                 else
                 {
-                    if (MessageBox.Show("Указано неверное имя пользователя или пароль! \n" +
-                    "Повторить ввод данных?", "Внимание!", MessageBoxButton.YesNo) == MessageBoxResult.No)
-                    {
-                        DialogResult = false;
-                    }
                     passwordBox.Password = "";
                     var element = e.OriginalSource as UIElement;
                     e.Handled = true;

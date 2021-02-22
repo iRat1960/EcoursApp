@@ -6,9 +6,8 @@
         xmlns:local="clr-namespace:EcoursApp.Forms"
         mc:Ignorable="d"
         Title="Вход в систему" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen"
-        Icon="/EcoursApp;component/flay.ico"
-        ResizeMode="NoResize" >
-    <!--Topmost="True"-->
+        Icon="/EcoursApp;component/flay.ico" Topmost="True" ResizeMode="NoResize" Loaded="Window_Loaded" >
+    
     <Grid Width="710" Height="444" Background="#242424">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

@@ -19,6 +19,7 @@ using System.Windows.Threading;
 using EcoursCLib.Controls;
 using System.IO;
 using System.Windows.Media;
+using EcoursCLib.Forms;
 
 namespace EcoursApp
 {
@@ -97,6 +98,7 @@ namespace EcoursApp
             
             X.DataReceived += ReceivedMessage;
             ThemeChange();
+
             List<string> list = new List<string> { "UUID", "ADID", "PCID" };
             string uuid = X.GetUUID();
             if (G.UUID.Length == 0 || G.UUID.Length > 0 && !list.Contains(G.UUID.Substring(0, 4)) || G.UUID != uuid)
@@ -108,12 +110,12 @@ namespace EcoursApp
             
             G.flChatAndTasks = false;
             
-            timer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal, (object s, EventArgs ev) =>
-            {
-                timeText.Text = DateTime.Now.ToString("HH:mm");
-                dateText.Text = DateTime.Now.ToString("dd/MM/yyyy");
-            }, Dispatcher);
-            if (G.flDateInBottom) timer.Start();
+            //timer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal, (object s, EventArgs ev) =>
+            //{
+            //    timeText.Text = DateTime.Now.ToString("HH:mm");
+            //    dateText.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            //}, Dispatcher);
+            //if (G.flDateInBottom) timer.Start();
         }
 
         private void Window_ContentRendered(object sender, EventArgs e)
@@ -560,6 +562,7 @@ namespace EcoursApp
                 pwd = new PwdWindow(title);
             else
                 pwd = new TopWindow();
+            pwd.Owner = this;
             if (pwd.ShowDialog() == true)
             {
                 tb2.Text = G.cUser;
@@ -583,6 +586,71 @@ namespace EcoursApp
             {
                 Close();
             }
+        }
+        /// <summary>
+        /// Авторизация на сервере
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="pwd"></param>
+        /// <returns></returns>
+        public int PwdAccept(string login, string pwd)
+        {
+            int result = 0;
+            string title = "Внимание!";
+            G.fdst = X.SQLC(login, pwd);
+            if (G.fdst > 0)
+            {
+                if (G.fdst > 8 && MessageXBox.Show("Необходимо сменить пароль входа в систему. \nХотите это сделать прямо сейчас?", 
+                    title, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+
+                }
+                G.cUser = login;
+                result = 1;
+            }
+            else
+            {
+                G.nHnd = X.SQLC(G.SqlConnectionString);
+                string mess = "";
+                bool flagError = false;
+                switch (G.fdst)
+                {
+                    case -5:
+                        mess = "Ошибка соединения с базой данных!";
+                        flagError = true;
+                        break;
+                    case -4:
+                        mess = "Ошибка настроек данных администратора!";
+                        flagError = true;
+                        break;
+                    case -3:
+                        mess = "Указанный пользователь не прописан на сервере!";
+                        flagError = true;
+                        break;
+                    case -2:
+                        mess = "Указан неверный пароль! \nПовторить ввод данных?";
+                        break;
+                    case -1:
+                        mess = "Указанный пользователь заблокирован! \nВойти под другим именем?";
+                        break;
+                    default:
+                        mess = "Указано неверно имя пользователя! \nПовторить ввод данных?";
+                        break;
+                }
+                if (flagError)
+                {
+                    MessageXBox.Show(mess, title, MessageBoxButton.OK, MessageBoxImage.Error);
+                    DialogResult = false;
+                }
+                else
+                {
+                    if (MessageXBox.Show(mess, title, MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                    {
+                        result = -1;
+                    }
+                }
+            }
+            return result;
         }
         /// <summary>
         /// Активировать задачу Чат

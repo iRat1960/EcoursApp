@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.IO;
+using System.Reflection;
 
 namespace EcoursApp.Forms
 {
@@ -22,7 +23,10 @@ namespace EcoursApp.Forms
 
             InputLanguageManager.Current.InputLanguageChanged += new InputLanguageEventHandler(Current_InputLanguageChanged);
             InputLanguageManager.Current.CurrentInputLanguage = new CultureInfo("en-US");
+        }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
             flAlarm = !(G.nHnd != null && ((G.nHnd is SqlConnection) || (G.nHnd is int && G.nHnd > 0)));
             string uri = "";
             if (flAlarm)
@@ -114,27 +118,17 @@ namespace EcoursApp.Forms
             }
             else
             {
-                G.fdst = X.SQLC(Login, Password);
-                if (G.fdst > 0)
-                {
-                    G.cUser = Login;
+                Type type = Owner.GetType();
+                object obj = type.InvokeMember("PwdAccept", BindingFlags.InvokeMethod, null, Owner, new object[] { Login, Password });
+                int result = (int)obj;
+                if (result == 1)
                     DialogResult = true;
-                }
                 else
                 {
-                    G.nHnd = X.SQLC(G.SqlConnectionString);
-                    if (G.fdst == -3)
-                    {
-                        MessageBox.Show("Ошибка соединения с базой данных!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    if (result == -1)
                         DialogResult = false;
-                    }
                     else
                     {
-                        if (MessageBox.Show("Указано неверное имя пользователя или пароль! \n" +
-                            "Повторить ввод данных?", "Внимание!", MessageBoxButton.YesNo) == MessageBoxResult.No)
-                        {
-                            DialogResult = false;
-                        }
                         passwordBox.Password = "";
                         var element = e.OriginalSource as UIElement;
                         e.Handled = true;
