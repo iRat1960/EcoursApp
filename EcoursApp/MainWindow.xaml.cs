@@ -109,13 +109,13 @@ namespace EcoursApp
             G.EmailPwd = "abdoszsattvzhsba";
             
             G.flChatAndTasks = false;
-            
-            //timer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal, (object s, EventArgs ev) =>
-            //{
-            //    timeText.Text = DateTime.Now.ToString("HH:mm");
-            //    dateText.Text = DateTime.Now.ToString("dd/MM/yyyy");
-            //}, Dispatcher);
-            //if (G.flDateInBottom) timer.Start();
+
+            timer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal, (object s, EventArgs ev) =>
+            {
+                timeText.Text = DateTime.Now.ToString("HH:mm");
+                dateText.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            }, Dispatcher);
+            if (G.flDateInBottom) timer.Start();
         }
 
         private void Window_ContentRendered(object sender, EventArgs e)
@@ -600,12 +600,16 @@ namespace EcoursApp
             G.fdst = X.SQLC(login, pwd);
             if (G.fdst > 0)
             {
+                G.cUser = login;
                 if (G.fdst > 8 && MessageXBox.Show("Необходимо сменить пароль входа в систему. \nХотите это сделать прямо сейчас?", 
                     title, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-
+                    NewPassword pwdwin = new NewPassword();
+                    pwdwin.OldPassword = pwd;
+                    pwdwin.Owner = this;
+                    pwdwin.ShowDialog();
+                    G.fdst &= 7;
                 }
-                G.cUser = login;
                 result = 1;
             }
             else

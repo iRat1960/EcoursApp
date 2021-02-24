@@ -41,6 +41,7 @@
 
   <ItemGroup>
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.11.3" />
+    <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="161.46041.41" />
     <PackageReference Include="Ookii.Dialogs.Wpf" Version="3.0.1" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
