@@ -20,12 +20,13 @@ using EcoursCLib.Controls;
 using System.IO;
 using System.Windows.Media;
 using EcoursCLib.Forms;
+using EcoursCCont.Forms;
 
 namespace EcoursApp
 {
     public partial class MainWindow : Window
     {
-        DataView Accounts;
+        DataView qAccounts;
         bool IsOpenLeftPanel = false, IsOpenTopPanel = false;
         int HomePageId = 1;
         DispatcherTimer timer;
@@ -566,15 +567,18 @@ namespace EcoursApp
             if (pwd.ShowDialog() == true)
             {
                 tb2.Text = G.cUser;
+
                 string cmnd = "exec up_getaccounts " + G.nUserId;
-                Accounts = X.SQLE(G.nHnd, cmnd, "qTemp");
-                if (Accounts != null && Accounts.Count > 0)
+                qAccounts = X.SQLE(G.nHnd, cmnd, "qAccounts");
+                if (qAccounts != null && qAccounts.Count > 0)
                 {
-                    G.nAccountId = (int)Accounts[0].Row["Id"];
-                    comboBox.ItemsSource = Accounts;
+                    G.nAccountId = (int)qAccounts[0].Row["Id"];
+                    comboBox.ItemsSource = qAccounts;
                     comboBox.SelectedIndex = 0;
                 }
+
                 GenTopMenu();
+                // Заменить на автозагрузку
                 if (G.flChatAndTasks)
                 {
                     OpenChatAndTask();
@@ -601,6 +605,7 @@ namespace EcoursApp
             if (G.fdst > 0)
             {
                 G.cUser = login;
+                G.cUserPwd = pwd;
                 if (G.fdst > 8 && MessageXBox.Show("Необходимо сменить пароль входа в систему. \nХотите это сделать прямо сейчас?", 
                     title, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {

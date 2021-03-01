@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Forms\NewPassword.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="flay.ico" />
     <None Remove="Images\add1_active.png" />
     <None Remove="Images\Admin.png" />
@@ -28,6 +32,7 @@
     <None Remove="Images\quitw.png" />
     <None Remove="Images\userAdd.png" />
     <None Remove="s1200.png" />
+    <Page Remove="Forms\NewPassword.xaml" />
     <None Include="flay.ico">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
