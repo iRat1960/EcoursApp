@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="App.config~RF8a5c3a2.TMP" />
     <None Remove="flay.ico" />
     <None Remove="Images\add1_active.png" />
     <None Remove="Images\Admin.png" />
@@ -32,6 +33,7 @@
     <None Remove="Images\quitw.png" />
     <None Remove="Images\userAdd.png" />
     <None Remove="s1200.png" />
+    <None Remove="Синхронизация.xps" />
     <Page Remove="Forms\NewPassword.xaml" />
     <None Include="flay.ico">
       <Pack>True</Pack>
@@ -45,18 +47,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DocumentFormat.OpenXml" Version="2.11.3" />
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.12.3" />
     <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="161.46041.41" />
-    <PackageReference Include="Ookii.Dialogs.Wpf" Version="3.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="3.1.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
-    <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
     <PackageReference Include="System.Management" Version="5.0.0" />
-    <PackageReference Include="System.Private.ServiceModel" Version="4.8.0" />
-    <PackageReference Include="System.ServiceModel.Duplex" Version="4.8.0" />
-    <PackageReference Include="System.ServiceModel.Http" Version="4.8.0" />
-    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.8.0" />
-    <PackageReference Include="System.ServiceModel.Security" Version="4.8.0" />
+    <PackageReference Include="System.Private.ServiceModel" Version="4.8.1" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.8.1" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.8.1" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.8.1" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.8.1" />
     <PackageReference Include="WpfAnimatedGif" Version="2.0.0" />
   </ItemGroup>
 

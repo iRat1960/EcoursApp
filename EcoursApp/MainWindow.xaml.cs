@@ -21,12 +21,12 @@ using System.IO;
 using System.Windows.Media;
 using EcoursCLib.Forms;
 using EcoursCCont.Forms;
+using EcoursCLib.Models;
 
 namespace EcoursApp
 {
     public partial class MainWindow : Window
     {
-        DataView qAccounts;
         bool IsOpenLeftPanel = false, IsOpenTopPanel = false;
         int HomePageId = 1;
         DispatcherTimer timer;
@@ -37,45 +37,35 @@ namespace EcoursApp
         {
             InitializeComponent();
             InputLanguageManager.Current.InputLanguageChanged += new InputLanguageEventHandler(Current_InputLanguageChanged);
+            X.DataReceived += ReceivedMessage;
         }
 
         #region --- Обработчики событий формы ---
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            G.nTypeConnect = Properties.Settings.Default.nTypeConnect;
-            G.cAppName = Properties.Settings.Default.cAppName;
-            G.cExtension = Properties.Settings.Default.cExtension;
-            G.nStyleKod = Properties.Settings.Default.nStyleKod;
-            G.cUser = Properties.Settings.Default.cUser;
-            G.nUserId = Properties.Settings.Default.nUserId;
-            G.nAccountId = Properties.Settings.Default.nAccountId;
-            G.cRole = Properties.Settings.Default.cRole;
-            G.nRoleId = Properties.Settings.Default.nRoleId;
             G.nTypeLogin = Properties.Settings.Default.nTypeLogin;
             G.nSetupLogin = Properties.Settings.Default.nSetupLogin;
             G.flConfidential = Properties.Settings.Default.flConfidential;
             G.flEnabledSinchr = Properties.Settings.Default.flEnabledSinchr;
             G.flStyleSinchr = Properties.Settings.Default.flStyleSinchr;
             G.flModulsSinchr = Properties.Settings.Default.flModelsSinchr;
-            G.flConfidSinchr = Properties.Settings.Default.flConfidSinchr;
             G.flOtherSinchr = Properties.Settings.Default.flOtherSinchr;
-            G.UUID = Properties.Settings.Default.UUID;
-            G.flDateInBottom = Properties.Settings.Default.flDateInBottom;
-            G.flEnabledStyle = Properties.Settings.Default.flEnabledStyle;
-            G.flKeyInBottom = Properties.Settings.Default.flKeyInBottom;
-            G.flStyleInTop = Properties.Settings.Default.flStyleInTop;
-            G.HumanFlags = Properties.Settings.Default.Flags;
-            //G.cDataStore = Properties.Settings.Default.DataStore;
-            //G.cTemp = Properties.Settings.Default.Temp;
-            G.cDataRootDir = Properties.Settings.Default.DataRootDir;
-            G.flChatAndTasks = Properties.Settings.Default.flChatAndTasks;
             System.Drawing.Color color = Properties.Settings.Default.ChatWallPaper;
             G.ChatWallPaper = new SolidColorBrush(Color.FromArgb(color.A, color.R, color.G, color.B));
             G.ChatPathImg = Properties.Settings.Default.ChatPathImg;
             G.ChatPathDoc = Properties.Settings.Default.ChatPathDoc;
-            
+            G.HumanFlags = Properties.Settings.Default.Flags;
+            G.flEnabledStyle = Properties.Settings.Default.flEnabledStyle;
+            G.nStyleKod = Properties.Settings.Default.nStyleKod;
+            G.flStyleInTop = Properties.Settings.Default.flStyleInTop;
+            G.flDateInBottom = Properties.Settings.Default.flDateInBottom;
+            G.flKeyInBottom = Properties.Settings.Default.flKeyInBottom;
+            G.UUID = Properties.Settings.Default.UUID;
+            G.cAppName = Properties.Settings.Default.cAppName;
             G.cVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            G.cExtension = Properties.Settings.Default.cExtension;
+            G.cDataRootDir = Properties.Settings.Default.DataRootDir;
             G.cDefaultAssemblyName = "EcoursСCont.FX";
             G.WinOwner = this;
             G.cAppRootDir = Environment.CurrentDirectory;
@@ -84,6 +74,7 @@ namespace EcoursApp
             {
                 Directory.CreateDirectory(G.cTemp);
             }
+
             // только для Windows
             G.cDownloads = X.KnownFolders.GetPath(X.KnownFolder.Downloads);
             G.cDocuments = X.KnownFolders.GetPath(X.KnownFolder.Documents);
@@ -91,32 +82,27 @@ namespace EcoursApp
 
             if (G.ChatPathDoc == string.Empty) G.ChatPathDoc = G.cDocuments;
             if (G.ChatPathImg == string.Empty) G.ChatPathImg = G.cPictures;
-
-            G.SqlConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            string[] array = G.SqlConnectionString.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
-            G.cDataSource = array.FirstOrDefault(o => o.Contains("Data Source=")).Replace("Data Source=", "");
-            G.cBaseSQL = array.FirstOrDefault(o => o.Contains("Initial Catalog=")).Replace("Initial Catalog=", "");
             
-            X.DataReceived += ReceivedMessage;
-            ThemeChange();
-
             List<string> list = new List<string> { "UUID", "ADID", "PCID" };
             string uuid = X.GetUUID();
             if (G.UUID.Length == 0 || G.UUID.Length > 0 && !list.Contains(G.UUID.Substring(0, 4)) || G.UUID != uuid)
                 G.UUID = uuid;
-            G.nHnd = X.SQLC(G.SqlConnectionString);
-
+            // *** тестовые данные ***
             G.Email = "xairat1960@gmail.com";
             G.EmailPwd = "abdoszsattvzhsba";
-            
             G.flChatAndTasks = false;
-
-            timer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal, (object s, EventArgs ev) =>
-            {
-                timeText.Text = DateTime.Now.ToString("HH:mm");
-                dateText.Text = DateTime.Now.ToString("dd/MM/yyyy");
-            }, Dispatcher);
-            if (G.flDateInBottom) timer.Start();
+            // *******
+            G.cUser = Properties.Settings.Default.cUser;
+            G.nUserId = Properties.Settings.Default.nUserId;
+            G.nAccountId = Properties.Settings.Default.nAccountId;
+            G.cRole = Properties.Settings.Default.cRole;
+            G.nRoleId = Properties.Settings.Default.nRoleId;
+            G.nTypeConnect = Properties.Settings.Default.nTypeConnect;
+            G.SqlConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            string[] array = G.SqlConnectionString.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
+            G.cDataSource = array.FirstOrDefault(o => o.Contains("Data Source=")).Replace("Data Source=", "");
+            G.cBaseSQL = array.FirstOrDefault(o => o.Contains("Initial Catalog=")).Replace("Initial Catalog=", "");
+            G.nHnd = X.SQLC(G.SqlConnectionString);
         }
 
         private void Window_ContentRendered(object sender, EventArgs e)
@@ -155,7 +141,6 @@ namespace EcoursApp
             Properties.Settings.Default.flEnabledSinchr = G.flEnabledSinchr;
             Properties.Settings.Default.flStyleSinchr = G.flStyleSinchr;
             Properties.Settings.Default.flModelsSinchr = G.flModulsSinchr;
-            Properties.Settings.Default.flConfidSinchr = G.flConfidSinchr;
             Properties.Settings.Default.flOtherSinchr = G.flOtherSinchr;
             Properties.Settings.Default.flDateInBottom = G.flDateInBottom;
             Properties.Settings.Default.flEnabledStyle = G.flEnabledStyle;
@@ -163,8 +148,6 @@ namespace EcoursApp
             Properties.Settings.Default.flStyleInTop = G.flStyleInTop;
             Properties.Settings.Default.Flags = G.HumanFlags;
             Properties.Settings.Default.UUID = G.UUID;
-            //Properties.Settings.Default.DataStore = G.cDataStore;
-            //Properties.Settings.Default.Temp = G.cTemp;
             Properties.Settings.Default.DataRootDir = G.cDataRootDir;
             Properties.Settings.Default.flChatAndTasks = G.flChatAndTasks;
             Properties.Settings.Default.ChatPathImg = G.ChatPathImg;
@@ -383,10 +366,9 @@ namespace EcoursApp
         /// <param name="e"></param>
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBox comboBox = (ComboBox)sender;
-            DataRowView item = (DataRowView)comboBox.SelectedItem;
-            if (item != null)
+            if (comboBox.SelectedItem != null)
             {
+                DataRowView item = (DataRowView)comboBox.SelectedItem;
                 int id = (int)item.Row["Id"];
                 if (G.nAccountId != id)
                 {
@@ -567,17 +549,67 @@ namespace EcoursApp
             if (pwd.ShowDialog() == true)
             {
                 tb2.Text = G.cUser;
-
-                string cmnd = "exec up_getaccounts " + G.nUserId;
-                qAccounts = X.SQLE(G.nHnd, cmnd, "qAccounts");
-                if (qAccounts != null && qAccounts.Count > 0)
+                G.IsSinchron = false;
+                G.nAccountId = 0;
+                X.SQLEAsync(new Action<dynamic>(
+                delegate (dynamic views)
                 {
-                    G.nAccountId = (int)qAccounts[0].Row["Id"];
-                    comboBox.ItemsSource = qAccounts;
-                    comboBox.SelectedIndex = 0;
+                    if (views != null && views is DataView)
+                    {
+                        DataView qAccount = (DataView)views;
+                        comboBox.ItemsSource = qAccount;
+                        comboBox.SelectedIndex = 0;
+                    }
+                }), "exec up_getaccounts " + G.nUserId, "qAccount");
+                
+                if (!G.flAdminRole)
+                {
+                    if (G.UUID != G.UserUUID)
+                    {
+                        int result = X.SQLE(G.nHnd, "exec up_checkuid " + G.nUserId.ToString() + ",'" + G.UUID + "'", "*");
+                        if (result == 0)
+                        {
+                            if (MessageXBox.Show("Привязать этот компьютер в качестве основного устройства пользователя " + G.cUser, "Внимание!",
+                                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                            {
+                                X.SQLE(G.nHnd, "update Users set UUID='" + G.UUID + "' where Id=" + G.nUserId.ToString());
+                            }
+                            else
+                            {
+                                if (MessageXBox.Show("Отметить этот компьютер как чужой?", "Внимание!", MessageBoxButton.YesNo,
+                                    MessageBoxImage.Question) == MessageBoxResult.Yes)
+                                {
+                                    X.SQLE(G.nHnd, "exec up_setuuid " + G.nUserId.ToString() + ",'" + G.UUID + "',1");
+                                }
+                                else
+                                {
+                                    X.SQLE(G.nHnd, "exec up_setuuid " + G.nUserId.ToString() + ",'" + G.UUID + "'");
+                                }
+                            }
+                        }
+                    }
+                    DataView qParam = X.SQLE(G.nHnd, "exec up_getparams " + G.nUserId.ToString() + ",'" + G.UUID + "'", "qParam");
+                    if (qParam != null && qParam.Count > 0)
+                    {
+                        foreach (DataRowView row in qParam)
+                        {
+                            string name = row["Name"].ToString();
+                            object val = row["Value"];
+                            G.IsSinchron |= G.SetValue(name, val);
+                        }
+                    }
+                    qParam?.Dispose();
                 }
 
-                GenTopMenu();
+                timer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal, (object s, EventArgs ev) =>
+                {
+                    timeText.Text = DateTime.Now.ToString("HH:mm");
+                    dateText.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                }, Dispatcher);
+                if (G.flDateInBottom) timer.Start();
+                
+                ThemeChange();
+
                 // Заменить на автозагрузку
                 if (G.flChatAndTasks)
                 {
@@ -681,7 +713,7 @@ namespace EcoursApp
         /// </summary>
         private void GenTopMenu()
         {
-            if (IsConnected)
+            if (G.nHnd != null && ((G.nHnd is SqlConnection) || (G.nHnd is int && G.nHnd > 0)))
             {
                 button3.ToolTip = "Сменить пользователя";
                 button3.ControlText = "Сменить пользователя";
@@ -853,7 +885,5 @@ namespace EcoursApp
         }
 
         #endregion
-
-        private bool IsConnected => G.nHnd != null && ((G.nHnd is SqlConnection) || (G.nHnd is int && G.nHnd > 0));
     }
 }

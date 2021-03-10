@@ -194,18 +194,6 @@ namespace EcoursApp.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool flConfidSinchr {
-            get {
-                return ((bool)(this["flConfidSinchr"]));
-            }
-            set {
-                this["flConfidSinchr"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool flOtherSinchr {
             get {
                 return ((bool)(this["flOtherSinchr"]));
