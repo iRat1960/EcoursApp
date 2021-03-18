@@ -528,7 +528,7 @@ namespace EcoursApp
                         }
                     case 5: // ??? генератор диалогового окна
                         {
-
+                            
                             break;
                         }
                 }
