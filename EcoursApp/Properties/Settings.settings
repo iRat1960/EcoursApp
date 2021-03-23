@@ -35,16 +35,16 @@
     <Setting Name="flConfidential" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="flEnabledSinchr" Type="System.Boolean" Scope="User">
+    <Setting Name="flEnabledSynch" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="flStyleSinchr" Type="System.Boolean" Scope="User">
+    <Setting Name="flStyleSynch" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="flModelsSinchr" Type="System.Boolean" Scope="User">
+    <Setting Name="flModelsSynch" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="flOtherSinchr" Type="System.Boolean" Scope="User">
+    <Setting Name="flOtherSynch" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="UUID" Type="System.String" Scope="User">

@@ -158,48 +158,48 @@ namespace EcoursApp.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool flEnabledSinchr {
+        public bool flEnabledSynch {
             get {
-                return ((bool)(this["flEnabledSinchr"]));
+                return ((bool)(this["flEnabledSynch"]));
             }
             set {
-                this["flEnabledSinchr"] = value;
+                this["flEnabledSynch"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool flStyleSinchr {
+        public bool flStyleSynch {
             get {
-                return ((bool)(this["flStyleSinchr"]));
+                return ((bool)(this["flStyleSynch"]));
             }
             set {
-                this["flStyleSinchr"] = value;
+                this["flStyleSynch"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool flModelsSinchr {
+        public bool flModelsSynch {
             get {
-                return ((bool)(this["flModelsSinchr"]));
+                return ((bool)(this["flModelsSynch"]));
             }
             set {
-                this["flModelsSinchr"] = value;
+                this["flModelsSynch"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool flOtherSinchr {
+        public bool flOtherSynch {
             get {
-                return ((bool)(this["flOtherSinchr"]));
+                return ((bool)(this["flOtherSynch"]));
             }
             set {
-                this["flOtherSinchr"] = value;
+                this["flOtherSynch"] = value;
             }
         }
         

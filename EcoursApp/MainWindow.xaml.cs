@@ -47,10 +47,10 @@ namespace EcoursApp
             G.nTypeLogin = Properties.Settings.Default.nTypeLogin;
             G.nSetupLogin = Properties.Settings.Default.nSetupLogin;
             G.flConfidential = Properties.Settings.Default.flConfidential;
-            G.flEnabledSinchr = Properties.Settings.Default.flEnabledSinchr;
-            G.flStyleSinchr = Properties.Settings.Default.flStyleSinchr;
-            G.flModulsSinchr = Properties.Settings.Default.flModelsSinchr;
-            G.flOtherSinchr = Properties.Settings.Default.flOtherSinchr;
+            G.flEnabledSynch = Properties.Settings.Default.flEnabledSynch;
+            G.flStyleSynch = Properties.Settings.Default.flStyleSynch;
+            G.flModulsSynch = Properties.Settings.Default.flModelsSynch;
+            G.flOtherSynch = Properties.Settings.Default.flOtherSynch;
             System.Drawing.Color color = Properties.Settings.Default.ChatWallPaper;
             G.ChatWallPaper = new SolidColorBrush(Color.FromArgb(color.A, color.R, color.G, color.B));
             G.ChatPathImg = Properties.Settings.Default.ChatPathImg;
@@ -129,7 +129,6 @@ namespace EcoursApp
             Properties.Settings.Default.nTypeConnect = G.nTypeConnect;
             Properties.Settings.Default.cAppName = G.cAppName;
             Properties.Settings.Default.cExtension = G.cExtension;
-            Properties.Settings.Default.nStyleKod = G.nStyleKod;
             Properties.Settings.Default.cUser = G.cUser;
             Properties.Settings.Default.nUserId = G.nUserId;
             Properties.Settings.Default.nAccountId = G.nAccountId;
@@ -137,26 +136,30 @@ namespace EcoursApp
             Properties.Settings.Default.nRoleId = G.nRoleId;
             Properties.Settings.Default.nTypeLogin = G.nTypeLogin;
             Properties.Settings.Default.nSetupLogin = G.nSetupLogin;
-            Properties.Settings.Default.flConfidential = G.flConfidential;
-            Properties.Settings.Default.flEnabledSinchr = G.flEnabledSinchr;
-            Properties.Settings.Default.flStyleSinchr = G.flStyleSinchr;
-            Properties.Settings.Default.flModelsSinchr = G.flModulsSinchr;
-            Properties.Settings.Default.flOtherSinchr = G.flOtherSinchr;
-            Properties.Settings.Default.flDateInBottom = G.flDateInBottom;
-            Properties.Settings.Default.flEnabledStyle = G.flEnabledStyle;
-            Properties.Settings.Default.flKeyInBottom = G.flKeyInBottom;
-            Properties.Settings.Default.flStyleInTop = G.flStyleInTop;
-            Properties.Settings.Default.Flags = G.HumanFlags;
+            Properties.Settings.Default.flEnabledSynch = G.flEnabledSynch;
+            if (!G.IsSynchron)
+            { 
+                Properties.Settings.Default.flStyleSynch = G.flStyleSynch;
+                Properties.Settings.Default.flModelsSynch = G.flModulsSynch;
+                Properties.Settings.Default.flOtherSynch = G.flOtherSynch;
+                Properties.Settings.Default.flEnabledStyle = G.flEnabledStyle;
+                Properties.Settings.Default.nStyleKod = G.nStyleKod;
+                Properties.Settings.Default.flStyleInTop = G.flStyleInTop;
+                Properties.Settings.Default.flDateInBottom = G.flDateInBottom;
+                Properties.Settings.Default.flKeyInBottom = G.flKeyInBottom;
+                Color color = ((SolidColorBrush)G.ChatWallPaper).Color;
+                Properties.Settings.Default.ChatWallPaper = new System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B)).Color;
+                Properties.Settings.Default.Flags = G.HumanFlags;
+                Properties.Settings.Default.flConfidential = G.flConfidential;
+            }
             Properties.Settings.Default.UUID = G.UUID;
             Properties.Settings.Default.DataRootDir = G.cDataRootDir;
+            
             Properties.Settings.Default.flChatAndTasks = G.flChatAndTasks;
             Properties.Settings.Default.ChatPathImg = G.ChatPathImg;
             Properties.Settings.Default.ChatPathDoc = G.ChatPathDoc;
-            Color color = ((SolidColorBrush)G.ChatWallPaper).Color;
-            Properties.Settings.Default.ChatWallPaper = new System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B)).Color;
 
             Properties.Settings.Default.Save();
-
             if (G.nHnd != null)
             {
                 X.SQLD();
@@ -549,7 +552,7 @@ namespace EcoursApp
             if (pwd.ShowDialog() == true)
             {
                 tb2.Text = G.cUser;
-                G.IsSinchron = false;
+                G.IsSynchron = false;
                 G.nAccountId = 0;
                 X.SQLEAsync(new Action<dynamic>(
                 delegate (dynamic views)
@@ -595,7 +598,7 @@ namespace EcoursApp
                         {
                             string name = row["Name"].ToString();
                             object val = row["Value"];
-                            G.IsSinchron |= G.SetValue(name, val);
+                            G.IsSynchron |= G.SetValue(name, val);
                         }
                     }
                     qParam?.Dispose();
