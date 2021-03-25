@@ -22,6 +22,7 @@ using System.Windows.Media;
 using EcoursCLib.Forms;
 using EcoursCCont.Forms;
 using EcoursCLib.Models;
+using System.Threading.Tasks;
 
 namespace EcoursApp
 {
@@ -554,17 +555,37 @@ namespace EcoursApp
                 tb2.Text = G.cUser;
                 G.IsSynchron = false;
                 G.nAccountId = 0;
+
                 X.SQLEAsync(new Action<dynamic>(
                 delegate (dynamic views)
                 {
                     if (views != null && views is DataView)
                     {
-                        DataView qAccount = (DataView)views;
-                        comboBox.ItemsSource = qAccount;
+                        comboBox.ItemsSource = (DataView)views;
                         comboBox.SelectedIndex = 0;
                     }
                 }), "exec up_getaccounts " + G.nUserId, "qAccount");
-                
+
+                X.SQLEAsync(new Action<dynamic>(
+                delegate (dynamic views)
+                {
+                    if (views != null && views is DataView)
+                    {
+                        foreach (DataRowView row in (DataView)views)
+                        {
+                            TabItemTag tag = new TabItemTag
+                            {
+                                Id = (int)row["Id"],
+                                nType = Convert.ToInt32(row["EventType"]),
+                                cMethod = row["Event"].ToString(),
+                                cAssemblyName = row["Assembly"].ToString(),
+                                IsParams = Convert.ToBoolean(row["IsParams"])
+                            };
+                            if (tag.nType > 0) ExecMethod(tag);
+                        }
+                    }
+                }), "exec up_getautoload", "qTags");
+
                 if (!G.flAdminRole)
                 {
                     if (G.UUID != G.UserUUID)
@@ -603,23 +624,13 @@ namespace EcoursApp
                     }
                     qParam?.Dispose();
                 }
-
+                ThemeChange();
                 timer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal, (object s, EventArgs ev) =>
                 {
                     timeText.Text = DateTime.Now.ToString("HH:mm");
                     dateText.Text = DateTime.Now.ToString("dd/MM/yyyy");
                 }, Dispatcher);
                 if (G.flDateInBottom) timer.Start();
-                
-                ThemeChange();
-
-                // Заменить на автозагрузку
-                if (G.flChatAndTasks)
-                {
-                    OpenChatAndTask();
-                }
-                else
-                    sbItemChat.Visibility = Visibility.Collapsed;
             }
             else
             {
@@ -699,8 +710,9 @@ namespace EcoursApp
         /// <summary>
         /// Активировать задачу Чат
         /// </summary>
-        private void OpenChatAndTask()
+        public void OpenChatAndTask()
         {
+            sbItemChat.Visibility = Visibility.Visible;
             gridChat = new ChatAndTask(this)
             {
                 HorizontalAlignment = HorizontalAlignment.Right,

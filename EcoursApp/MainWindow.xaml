@@ -118,7 +118,7 @@
                     </StackPanel>
                 </ComboBox>
             </StatusBarItem>
-            <StatusBarItem x:Name="sbItemChat" Grid.Column="3" Visibility="Visible">
+            <StatusBarItem x:Name="sbItemChat" Grid.Column="3" Visibility="Collapsed">
                 <Button x:Name="chatOpen" Foreground="Black" Width="32" Height="30" Style="{StaticResource ButtonStyle}" 
                         Click="chatOpen_Click">
                     <Image x:Name="imgChat" Source="/EcoursCLib;component/Images/Black24x24/chats.png" Width="24"/>

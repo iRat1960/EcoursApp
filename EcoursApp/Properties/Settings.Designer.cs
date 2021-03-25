@@ -345,5 +345,16 @@ namespace EcoursApp.Properties {
                 this["ChatPathDoc"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::EcoursXLib.PartnerFlag PFlags {
+            get {
+                return ((global::EcoursXLib.PartnerFlag)(this["PFlags"]));
+            }
+            set {
+                this["PFlags"] = value;
+            }
+        }
     }
 }

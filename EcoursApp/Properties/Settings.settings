@@ -83,5 +83,8 @@
     <Setting Name="ChatPathDoc" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="PFlags" Type="EcoursXLib.PartnerFlag" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
