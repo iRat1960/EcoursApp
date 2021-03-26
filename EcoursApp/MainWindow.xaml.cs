@@ -57,6 +57,7 @@ namespace EcoursApp
             G.ChatPathImg = Properties.Settings.Default.ChatPathImg;
             G.ChatPathDoc = Properties.Settings.Default.ChatPathDoc;
             G.HumanFlags = Properties.Settings.Default.Flags;
+            G.PartnerFlags = Properties.Settings.Default.PFlags;
             G.flEnabledStyle = Properties.Settings.Default.flEnabledStyle;
             G.nStyleKod = Properties.Settings.Default.nStyleKod;
             G.flStyleInTop = Properties.Settings.Default.flStyleInTop;
@@ -151,6 +152,7 @@ namespace EcoursApp
                 Color color = ((SolidColorBrush)G.ChatWallPaper).Color;
                 Properties.Settings.Default.ChatWallPaper = new System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B)).Color;
                 Properties.Settings.Default.Flags = G.HumanFlags;
+                Properties.Settings.Default.PFlags = G.PartnerFlags;
                 Properties.Settings.Default.flConfidential = G.flConfidential;
             }
             Properties.Settings.Default.UUID = G.UUID;
