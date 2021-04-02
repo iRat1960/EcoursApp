@@ -86,5 +86,8 @@
     <Setting Name="PFlags" Type="EcoursXLib.PartnerFlag" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="WFlags" Type="EcoursXLib.WasteSiteFlag" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

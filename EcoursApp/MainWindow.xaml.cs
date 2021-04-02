@@ -58,6 +58,7 @@ namespace EcoursApp
             G.ChatPathDoc = Properties.Settings.Default.ChatPathDoc;
             G.HumanFlags = Properties.Settings.Default.Flags;
             G.PartnerFlags = Properties.Settings.Default.PFlags;
+            G.WasteSiteFlags = Properties.Settings.Default.WFlags;
             G.flEnabledStyle = Properties.Settings.Default.flEnabledStyle;
             G.nStyleKod = Properties.Settings.Default.nStyleKod;
             G.flStyleInTop = Properties.Settings.Default.flStyleInTop;
@@ -153,6 +154,7 @@ namespace EcoursApp
                 Properties.Settings.Default.ChatWallPaper = new System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B)).Color;
                 Properties.Settings.Default.Flags = G.HumanFlags;
                 Properties.Settings.Default.PFlags = G.PartnerFlags;
+                Properties.Settings.Default.WFlags = G.WasteSiteFlags;
                 Properties.Settings.Default.flConfidential = G.flConfidential;
             }
             Properties.Settings.Default.UUID = G.UUID;
@@ -795,7 +797,7 @@ namespace EcoursApp
                     ud.AddHandler(System.Windows.Controls.Primitives.ButtonBase.ClickEvent, new RoutedEventHandler(Tib_Click));
                     sp.Children.Add(ud);
                     // Выбор кнопок на вкладке
-                    cmnd = "exec up_genmenu " + row["Id"].ToString() + "," + G.nUserId + "," + G.nRoleId;
+                    cmnd = "exec up_genmenu " + row["Sid"].ToString() + "," + G.nUserId + "," + G.nRoleId;
                     DataView dvb = X.SQLE(G.nHnd, cmnd, "qmenu");
                     if (dvb != null && dvb.Count > 0)
                     {

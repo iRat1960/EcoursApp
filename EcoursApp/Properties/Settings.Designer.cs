@@ -356,5 +356,17 @@ namespace EcoursApp.Properties {
                 this["PFlags"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public global::EcoursXLib.WasteSiteFlag WFlags {
+            get {
+                return ((global::EcoursXLib.WasteSiteFlag)(this["WFlags"]));
+            }
+            set {
+                this["WFlags"] = value;
+            }
+        }
     }
 }
